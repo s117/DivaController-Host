@@ -1,0 +1,3 @@
+[submodule "PVSC_Parser"]
+	path = PVSC_Parser
+	url = https://github.com/s117/PVSC_Parser.git

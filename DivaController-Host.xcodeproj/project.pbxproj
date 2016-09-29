@@ -8,7 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		13AFFD491D9DABC700CAA14E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 13AFFD481D9DABC700CAA14E /* main.cpp */; };
+		13AFFD571D9DAC4600CAA14E /* libPVSC_Parser.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 13AFFD561D9DAC2300CAA14E /* libPVSC_Parser.a */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		13AFFD551D9DAC2300CAA14E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 13AFFD501D9DAC2300CAA14E /* PVSC_Parser.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1361B7A71D9DA44600793DA1;
+			remoteInfo = PVSC_Parser;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		13AFFD431D9DABC700CAA14E /* CopyFiles */ = {
@@ -25,6 +36,8 @@
 /* Begin PBXFileReference section */
 		13AFFD451D9DABC700CAA14E /* DivaController-Host */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "DivaController-Host"; sourceTree = BUILT_PRODUCTS_DIR; };
 		13AFFD481D9DABC700CAA14E /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		13AFFD501D9DAC2300CAA14E /* PVSC_Parser.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PVSC_Parser.xcodeproj; path = PVSC_Parser/PVSC_Parser.xcodeproj; sourceTree = "<group>"; };
+		13AFFD581D9DAD3000CAA14E /* pv_801_extreme.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pv_801_extreme.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +45,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				13AFFD571D9DAC4600CAA14E /* libPVSC_Parser.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -43,6 +57,7 @@
 			children = (
 				13AFFD471D9DABC700CAA14E /* DivaController-Host */,
 				13AFFD461D9DABC700CAA14E /* Products */,
+				13AFFD4F1D9DAC2300CAA14E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,8 +73,25 @@
 			isa = PBXGroup;
 			children = (
 				13AFFD481D9DABC700CAA14E /* main.cpp */,
+				13AFFD581D9DAD3000CAA14E /* pv_801_extreme.h */,
 			);
 			path = "DivaController-Host";
+			sourceTree = "<group>";
+		};
+		13AFFD4F1D9DAC2300CAA14E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				13AFFD501D9DAC2300CAA14E /* PVSC_Parser.xcodeproj */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		13AFFD511D9DAC2300CAA14E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				13AFFD561D9DAC2300CAA14E /* libPVSC_Parser.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -107,12 +139,28 @@
 			mainGroup = 13AFFD3C1D9DABC700CAA14E;
 			productRefGroup = 13AFFD461D9DABC700CAA14E /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 13AFFD511D9DAC2300CAA14E /* Products */;
+					ProjectRef = 13AFFD501D9DAC2300CAA14E /* PVSC_Parser.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				13AFFD441D9DABC700CAA14E /* DivaController-Host */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		13AFFD561D9DAC2300CAA14E /* libPVSC_Parser.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libPVSC_Parser.a;
+			remoteRef = 13AFFD551D9DAC2300CAA14E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXSourcesBuildPhase section */
 		13AFFD411D9DABC700CAA14E /* Sources */ = {
@@ -216,6 +264,7 @@
 		13AFFD4D1D9DABC700CAA14E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				HEADER_SEARCH_PATHS = "../PVSC_Parser/PVSC_Parser/include/**";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -223,6 +272,7 @@
 		13AFFD4E1D9DABC700CAA14E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				HEADER_SEARCH_PATHS = "../PVSC_Parser/PVSC_Parser/include/**";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
