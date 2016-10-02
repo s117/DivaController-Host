@@ -33,6 +33,9 @@ private:
     
     int m_salt_param;
     uint32_t m_basetime;
+    DS4_Operate::KEY_CODE m_last_emit_key;
+    uint32_t m_last_emit_time;
+    
     //DS4_Controller* m_ctrl;
 };
 #endif /* DSC_Reader_hpp */

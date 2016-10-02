@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DivaController-Host/DS4_Controller.cpp"
-            timestampString = "497025221.016007"
+            timestampString = "497113546.736482"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "173"
-            endingLineNumber = "173"
+            startingLineNumber = "205"
+            endingLineNumber = "205"
             landmarkName = "DS4_Controller::dispatch_check(DS4_Controller *ctrl)"
             landmarkType = "7">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DivaController-Host/main.cpp"
-            timestampString = "497094326.402694"
+            timestampString = "497121908.015628"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
+            startingLineNumber = "121"
+            endingLineNumber = "121"
             landmarkName = "main(int argc, char* argv[])"
             landmarkType = "9">
          </BreakpointContent>
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DivaController-Host/main.cpp"
-            timestampString = "497094326.402694"
+            timestampString = "497121908.015628"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "94"
-            endingLineNumber = "94"
+            startingLineNumber = "163"
+            endingLineNumber = "163"
             landmarkName = "main(int argc, char* argv[])"
             landmarkType = "9">
          </BreakpointContent>
@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DivaController-Host/main.cpp"
-            timestampString = "497094326.402694"
+            timestampString = "497121908.015628"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "100"
-            endingLineNumber = "100"
+            startingLineNumber = "167"
+            endingLineNumber = "167"
             landmarkName = "main(int argc, char* argv[])"
             landmarkType = "9">
          </BreakpointContent>
@@ -90,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DivaController-Host/main.cpp"
-            timestampString = "497094326.402694"
+            timestampString = "497121908.015628"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "102"
-            endingLineNumber = "102"
+            startingLineNumber = "169"
+            endingLineNumber = "169"
             landmarkName = "main(int argc, char* argv[])"
             landmarkType = "9">
          </BreakpointContent>
@@ -106,11 +106,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DivaController-Host/main.cpp"
-            timestampString = "497094326.402694"
+            timestampString = "497121908.015628"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "97"
-            endingLineNumber = "97"
+            startingLineNumber = "164"
+            endingLineNumber = "164"
             landmarkName = "main(int argc, char* argv[])"
             landmarkType = "9">
          </BreakpointContent>
@@ -170,11 +170,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DivaController-Host/DS4_Controller.cpp"
-            timestampString = "497025221.016007"
+            timestampString = "497113546.736482"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "151"
-            endingLineNumber = "151"
+            startingLineNumber = "183"
+            endingLineNumber = "183"
             landmarkName = "DS4_Controller::tick(DS4_Controller* ctrl)"
             landmarkType = "7">
          </BreakpointContent>
@@ -186,11 +186,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DivaController-Host/DS4_Controller.cpp"
-            timestampString = "497025221.016007"
+            timestampString = "497113546.736482"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "152"
-            endingLineNumber = "152">
+            startingLineNumber = "184"
+            endingLineNumber = "184"
+            landmarkName = "DS4_Controller::tick(DS4_Controller* ctrl)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -200,11 +202,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DivaController-Host/DS4_Controller.cpp"
-            timestampString = "497025221.016007"
+            timestampString = "497113546.736482"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "122"
-            endingLineNumber = "122"
+            startingLineNumber = "161"
+            endingLineNumber = "161"
             landmarkName = "DS4_Controller::tick(DS4_Controller* ctrl)"
             landmarkType = "7">
          </BreakpointContent>
@@ -216,11 +218,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DivaController-Host/main.cpp"
-            timestampString = "497094326.402694"
+            timestampString = "497121908.015628"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "63"
-            endingLineNumber = "63"
+            startingLineNumber = "124"
+            endingLineNumber = "124"
             landmarkName = "main(int argc, char* argv[])"
             landmarkType = "9">
          </BreakpointContent>
@@ -232,11 +234,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DivaController-Host/DS4_Controller.cpp"
-            timestampString = "497025221.016007"
+            timestampString = "497113546.736482"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "84"
-            endingLineNumber = "84"
+            startingLineNumber = "122"
+            endingLineNumber = "122"
             landmarkName = "DS4_Controller::insert_operate(DS4_Operate&amp; op)"
             landmarkType = "7">
          </BreakpointContent>
@@ -248,11 +250,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DivaController-Host/DS4_Controller.cpp"
-            timestampString = "497025221.016007"
+            timestampString = "497113546.736482"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "157"
-            endingLineNumber = "157"
+            startingLineNumber = "189"
+            endingLineNumber = "189"
             landmarkName = "DS4_Controller::dispatch_check(DS4_Controller *ctrl)"
             landmarkType = "7">
          </BreakpointContent>
@@ -264,12 +266,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DivaController-Host/DS4_Controller.cpp"
-            timestampString = "497025221.016007"
+            timestampString = "497113546.736482"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "48"
-            endingLineNumber = "48"
-            landmarkName = "DS4_Controller::DS4_Controller(GlobalTimer1ms* gt)"
+            startingLineNumber = "87"
+            endingLineNumber = "87"
+            landmarkName = "DS4_Controller::DS4_Controller()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -280,11 +282,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DivaController-Host/DS4_Controller.cpp"
-            timestampString = "497025221.016007"
+            timestampString = "497113546.736482"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "165"
-            endingLineNumber = "165"
+            startingLineNumber = "197"
+            endingLineNumber = "197"
             landmarkName = "DS4_Controller::dispatch_check(DS4_Controller *ctrl)"
             landmarkType = "7">
          </BreakpointContent>
@@ -296,11 +298,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DivaController-Host/DS4_Controller.cpp"
-            timestampString = "497025221.016007"
+            timestampString = "497113546.736482"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "142"
-            endingLineNumber = "142"
+            startingLineNumber = "176"
+            endingLineNumber = "176"
             landmarkName = "DS4_Controller::tick(DS4_Controller* ctrl)"
             landmarkType = "7">
          </BreakpointContent>
@@ -312,11 +314,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DivaController-Host/DS4_Controller.cpp"
-            timestampString = "497025221.016007"
+            timestampString = "497113546.736482"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "141"
-            endingLineNumber = "141"
+            startingLineNumber = "175"
+            endingLineNumber = "175"
             landmarkName = "DS4_Controller::tick(DS4_Controller* ctrl)"
             landmarkType = "7">
          </BreakpointContent>
@@ -324,15 +326,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DivaController-Host/DS4_Controller.cpp"
-            timestampString = "497025221.016007"
+            timestampString = "497113546.736482"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "62"
-            endingLineNumber = "62"
+            startingLineNumber = "102"
+            endingLineNumber = "102"
             landmarkName = "DS4_Controller::~DS4_Controller()"
             landmarkType = "7">
          </BreakpointContent>
@@ -344,11 +346,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DivaController-Host/main.cpp"
-            timestampString = "497094326.402694"
+            timestampString = "497121908.015628"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70"
+            startingLineNumber = "131"
+            endingLineNumber = "131"
             landmarkName = "main(int argc, char* argv[])"
             landmarkType = "9">
          </BreakpointContent>
@@ -360,11 +362,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DivaController-Host/main.cpp"
-            timestampString = "497094326.402694"
+            timestampString = "497121908.015628"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "72"
-            endingLineNumber = "72"
+            startingLineNumber = "133"
+            endingLineNumber = "133"
             landmarkName = "main(int argc, char* argv[])"
             landmarkType = "9">
          </BreakpointContent>
@@ -376,11 +378,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DivaController-Host/main.cpp"
-            timestampString = "497094326.402694"
+            timestampString = "497121908.015628"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "53"
-            endingLineNumber = "53"
+            startingLineNumber = "110"
+            endingLineNumber = "110"
             landmarkName = "main(int argc, char* argv[])"
             landmarkType = "9">
          </BreakpointContent>
@@ -392,11 +394,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DivaController-Host/main.cpp"
-            timestampString = "497094326.402694"
+            timestampString = "497121908.015628"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
+            startingLineNumber = "109"
+            endingLineNumber = "109"
             landmarkName = "main(int argc, char* argv[])"
             landmarkType = "9">
          </BreakpointContent>
@@ -408,27 +410,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DivaController-Host/main.cpp"
-            timestampString = "497094326.402694"
+            timestampString = "497121908.015628"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "54"
-            endingLineNumber = "54"
+            startingLineNumber = "113"
+            endingLineNumber = "113"
             landmarkName = "main(int argc, char* argv[])"
             landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DivaController-Host/DS4_Controller.cpp"
-            timestampString = "497030217.765529"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -438,7 +426,35 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DivaController-Host/DSC_OperateEmitter.cpp"
-            timestampString = "497037629.244389"
+            timestampString = "497114083.735481"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "46"
+            endingLineNumber = "46">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DivaController-Host/DSC_OperateEmitter.cpp"
+            timestampString = "497114083.735481"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "71"
+            endingLineNumber = "71">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DivaController-Host/DSC_OperateEmitter.cpp"
+            timestampString = "497114083.735481"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "45"
@@ -452,11 +468,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DivaController-Host/DSC_OperateEmitter.cpp"
-            timestampString = "497093573.090132"
+            timestampString = "497114083.735481"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70">
+            startingLineNumber = "54"
+            endingLineNumber = "54">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -466,39 +482,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DivaController-Host/DSC_OperateEmitter.cpp"
-            timestampString = "497037629.244389"
+            timestampString = "497114083.735481"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "44"
-            endingLineNumber = "44">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DivaController-Host/DSC_OperateEmitter.cpp"
-            timestampString = "497037629.244389"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "53"
-            endingLineNumber = "53">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DivaController-Host/DSC_OperateEmitter.cpp"
-            timestampString = "497093573.090132"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
+            startingLineNumber = "86"
+            endingLineNumber = "86"
             landmarkName = "DSC_OperateEmitter::emit(DSC_Info* dsc, DS4_Controller* ctrl, int time_offset, bool is_salt)"
             landmarkType = "7">
          </BreakpointContent>
@@ -510,11 +498,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DivaController-Host/DSC_OperateEmitter.cpp"
-            timestampString = "497093573.090132"
+            timestampString = "497114083.735481"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "283"
-            endingLineNumber = "283"
+            startingLineNumber = "298"
+            endingLineNumber = "298"
             landmarkName = "DSC_OperateEmitter::emit_rush(DS4_Controller* ctrl, int time_offset, Note* note)"
             landmarkType = "7">
          </BreakpointContent>
@@ -526,13 +514,125 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DivaController-Host/DSC_OperateEmitter.cpp"
-            timestampString = "497093573.090132"
+            timestampString = "497114083.735481"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "292"
-            endingLineNumber = "292"
+            startingLineNumber = "307"
+            endingLineNumber = "307"
             landmarkName = "DSC_OperateEmitter::emit_rush(DS4_Controller* ctrl, int time_offset, Note* note)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DivaController-Host/DSC_OperateEmitter.cpp"
+            timestampString = "497114083.735481"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "105"
+            endingLineNumber = "105"
+            landmarkName = "DSC_OperateEmitter::emit(DSC_Info* dsc, DS4_Controller* ctrl, int time_offset, bool is_salt)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DivaController-Host/DSC_OperateEmitter.cpp"
+            timestampString = "497114573.092269"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "164"
+            endingLineNumber = "164"
+            landmarkName = "DSC_OperateEmitter::emit_singal_btn(DS4_Controller* ctrl, int time_offset, Note* note)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DivaController-Host/DSC_OperateEmitter.cpp"
+            timestampString = "497114573.092269"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "165"
+            endingLineNumber = "165"
+            landmarkName = "DSC_OperateEmitter::emit_singal_btn(DS4_Controller* ctrl, int time_offset, Note* note)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DivaController-Host/main.cpp"
+            timestampString = "497116528.356248"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
+            landmarkName = "get_first_note_time(DSC_Info *info)"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DivaController-Host/main.cpp"
+            timestampString = "497121908.015628"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "144"
+            endingLineNumber = "144"
+            landmarkName = "main(int argc, char* argv[])"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DivaController-Host/main.cpp"
+            timestampString = "497121908.015628"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "142"
+            endingLineNumber = "142"
+            landmarkName = "main(int argc, char* argv[])"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DivaController-Host/main.cpp"
+            timestampString = "497121908.015628"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "101"
+            endingLineNumber = "101"
+            landmarkName = "get_first_note_time(DSC_Info *info)"
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

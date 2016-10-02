@@ -15,12 +15,31 @@
       </ContextState>
       <ContextState
          contextName = "main:main.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "((Note *)0x1006009d0)">
+            </PersistentString>
+            <PersistentString
+               value = "((Note *)0x100600b80)">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "DSC_OperateEmitter::emit(DSC_Info*, DS4_Controller*, int, bool):DSC_OperateEmitter.cpp">
          <PersistentStrings>
             <PersistentString
                value = "it_ts.operator*()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DSC_OperateEmitter::emit_singal_btn(DS4_Controller*, int, __Note*):DSC_OperateEmitter.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "m_last_emit_key">
+            </PersistentString>
+            <PersistentString
+               value = "m_last_emit_time">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

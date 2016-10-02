@@ -2,6 +2,22 @@
 #include "stdio.h"
 #include "errno.h"
 #include <assert.h>
+#include <sys/time.h>
+#include <mach/mach.h>
+#include <mach/mach_time.h>
+#include <pthread.h>
+#include <stdlib.h>
+
+
+#define convert_timeval_to_us(tv) ((tv).tv_sec*1000000 + (tv).tv_usec)
+
+static inline uint64_t convert_us_to_ms(uint64_t us){
+    if((us/100)%10 > 4){
+        return us/1000+1;
+    }else{
+        return us/1000;
+    }
+}
 
 static const char* const TBL_CTRL_CODE_PATTERN[] = {
     "A%03hhu",
@@ -35,7 +51,31 @@ static void* dispatcher_trampoline(void *args) {
     return DS4_Controller::dispatch_check((DS4_Controller*) args);
 }
 
-DS4_Controller::DS4_Controller(GlobalTimer1ms* gt){
+static void move_pthread_to_realtime_scheduling_class(pthread_t pthread)
+{
+    mach_timebase_info_data_t timebase_info;
+    mach_timebase_info(&timebase_info);
+    
+    const uint64_t NANOS_PER_MSEC = 1000000ULL;
+    double clock2abs = ((double)timebase_info.denom / (double)timebase_info.numer) * NANOS_PER_MSEC;
+    
+    thread_time_constraint_policy_data_t policy;
+    policy.period      = 0;
+    policy.computation = (uint32_t)(5 * clock2abs); // 5 ms of work
+    policy.constraint  = (uint32_t)(10 * clock2abs);
+    policy.preemptible = FALSE;
+    
+    int kr = thread_policy_set(pthread_mach_thread_np(pthread_self()),
+                               THREAD_TIME_CONSTRAINT_POLICY,
+                               (thread_policy_t)&policy,
+                               THREAD_TIME_CONSTRAINT_POLICY_COUNT);
+    if (kr != KERN_SUCCESS) {
+        mach_error("thread_policy_set:", kr);
+        exit(1);
+    }
+}
+
+DS4_Controller::DS4_Controller(){
     INIT_LIST_HEAD(&m_output_list);
     
     INIT_LIST_HEAD(&m_op_pend_FIFO);
@@ -51,10 +91,11 @@ DS4_Controller::DS4_Controller(GlobalTimer1ms* gt){
         perror("sem_open");
     }
 
-    m_gt = gt;
-    m_routine_id = gt->add_routine(timer_trampoline, this);
+    m_gt = GlobalTimer1ms::get_instance();
+    m_routine_id = m_gt->add_routine(timer_trampoline, this);
     m_isRunning = true;
     pthread_create(&m_dispatcher_thread_id, NULL, dispatcher_trampoline, this);
+    move_pthread_to_realtime_scheduling_class(m_dispatcher_thread_id);
 }
 
 DS4_Controller::~DS4_Controller(){
@@ -62,91 +103,86 @@ DS4_Controller::~DS4_Controller(){
     m_gt->del_routine(m_routine_id);
     m_isRunning = false;
     sem_post(m_sem_ready);
-    //puts("S!\n");
     pthread_join(m_dispatcher_thread_id, NULL);
     sem_unlink("/dscsemardy");
     sem_close(m_sem_ready);
 }
 
+int DS4_Controller::start_timer(){
+    timeval start_time;
+    gettimeofday(&start_time, nullptr);
+    m_timestamp_start = convert_timeval_to_us(start_time);
+    m_gt->start_timer();
+    return 0;
+}
+
 void DS4_Controller::insert_operate(DS4_Operate& op){
+#ifdef DEBUG
     if((op.key < op.STICK_L_X_ANALOG) &&
     ((op.val != 0) && (op.val != 1))){
-#ifdef DEBUG
         fprintf(stderr, "invalid key value, key: %d, val:%d\n", op.key, op.val);
-#endif
         return;
     }
+#endif
     DS4_Operate *new_op = new DS4_Operate;
     *new_op = op;
     if(new_op->time_left_ms == 0){
         pthread_mutex_lock(&m_mtx_ready_FIFO);
         list_add(&new_op->list, &m_op_ready_FIFO);
-        //m_op_ready_FIFO.push_back(op);
         pthread_mutex_unlock(&m_mtx_ready_FIFO);
         sem_post(m_sem_ready);
-        //puts("S!\n");
     }else{
         pthread_mutex_lock(&m_mtx_pend_FIFO);
-        //std::list<DS4_Operate>::iterator it =  m_op_pend_FIFO.begin();
         DS4_Operate *cursor;
-        int delay_sig_prev = 0, delay_sig_curr = 0;
-        //while(it != m_op_pend_FIFO.end()){ // find the insert position in time differential chain
-        list_for_each_entry(cursor, &m_op_pend_FIFO, list){
-            if(cursor->time_left_ms!=0){
-                delay_sig_prev = delay_sig_curr;
-                delay_sig_curr += cursor->time_left_ms;
-                if(delay_sig_curr > new_op->time_left_ms){
-                    break;
-                }
+        list_for_each_entry(cursor, &m_op_pend_FIFO, list){ // find the insert position in time differential chain
+            if(cursor->time_left_ms > new_op->time_left_ms){
+                break;
             }
         }
-        if(&cursor->list == (&m_op_pend_FIFO)){ // insert at end
-            new_op->time_left_ms -= delay_sig_curr;
-            //m_op_pend_FIFO.push_back(op);
-            list_add_tail(&new_op->list, &m_op_pend_FIFO);
-        }else{ // insert in the middle
-            new_op->time_left_ms -= delay_sig_prev;
-            //m_op_pend_FIFO.insert(it, op);
-            list_add_tail(&new_op->list, &cursor->list);
-            cursor->time_left_ms -= new_op->time_left_ms;
-        }
-        //m_op_pend_FIFO.push_back(op);
+        list_add_tail(&new_op->list, &cursor->list);
         pthread_mutex_unlock(&m_mtx_pend_FIFO);
     }
 }
-volatile int overlap_flag;
+
+#ifdef DEBUG
+volatile int tick_overlap_flag;
+#endif
+
 // internal method for timer's trampoline function, DO NOT call this method explicitly
 void DS4_Controller::tick(DS4_Controller* ctrl){
-    if(overlap_flag){
-        printf("TICK OVERLAPED!, %d\n", overlap_flag);
+#ifdef DEBUG
+    if(tick_overlap_flag){
+        printf("TICK OVERLAPED!, %d\n", tick_overlap_flag);
     }
-    ++overlap_flag;
+    ++tick_overlap_flag;
+#endif
+    
+    timeval tv;
+    //uint64_t timestamp_now;
+    uint64_t time_elapsed;
     pthread_mutex_lock(&ctrl->m_mtx_pend_FIFO);
-    //if(ctrl->m_op_pend_FIFO.size() == 0){
-    if(list_empty(&ctrl->m_op_pend_FIFO)){
-        pthread_mutex_unlock(&ctrl->m_mtx_pend_FIFO);
-        --overlap_flag;
-        return;
-    }
-    //std::list<DS4_Operate>::iterator it = ctrl->m_op_pend_FIFO.begin();
+
     DS4_Operate *cursor, *n;
-    cursor = list_entry(ctrl->m_op_pend_FIFO.next, DS4_Operate, list);
+    gettimeofday(&tv, nullptr);
+    time_elapsed = convert_timeval_to_us(tv) - ctrl->m_timestamp_start;
+    
     //pthread_mutex_lock(&ctrl->m_mtx_tick);
-    --(cursor->time_left_ms);
     list_for_each_entry_safe(cursor, n, &ctrl->m_op_pend_FIFO, list){
-        if(cursor->time_left_ms != 0)
+        if(((int64_t)(cursor->time_left_ms - convert_us_to_ms(time_elapsed)) > 0)){
             break;
+        }
+            
         pthread_mutex_lock(&ctrl->m_mtx_ready_FIFO);
         list_move_tail(&cursor->list, &ctrl->m_op_ready_FIFO);
-        //ctrl->m_op_ready_FIFO.push_back(*it);
-        //it = ctrl->m_op_pend_FIFO.erase(it);
         pthread_mutex_unlock(&ctrl->m_mtx_ready_FIFO);
         sem_post(ctrl->m_sem_ready);
         //puts("S!\n");
     }
     //pthread_mutex_unlock(&ctrl->m_mtx_tick);
     pthread_mutex_unlock(&ctrl->m_mtx_pend_FIFO);
-    --overlap_flag;
+#ifdef DEBUG
+    --tick_overlap_flag;
+#endif
     return;
 }
 

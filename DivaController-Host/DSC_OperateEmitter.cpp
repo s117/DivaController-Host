@@ -6,8 +6,9 @@
 
 
 
-#define BTN_SINGLE_PUSH_ADVANCE_TIME_MS         (-40)
-#define BTN_SINGLE_HOLD_TIME_MS                 (100)
+#define BTN_SINGLE_PUSH_ADVANCE_TIME_MS         (0)
+#define BTN_SINGLE_HOLD_TIME_MS                 (50)
+#define BTN_SINGLE_EXCHANGE_THRES               (200)
 
 #define BTN_DUAL_PUSH_ADVANCE_TIME_MS           BTN_SINGLE_PUSH_ADVANCE_TIME_MS
 #define BTN_DUAL_HOLD_TIME_MS                   BTN_SINGLE_HOLD_TIME_MS
@@ -21,7 +22,7 @@
 
 #define STAR_SLIDE_ADVANCE_TIME_MS              (0)
 #define STAR_SLIDE_TRIGGE_POINT_DIV_N           (4)
-#define STAR_SLIDE_WINDOW_MS                    (80)
+#define STAR_SLIDE_WINDOW_MS                    (40)
 #define STAR_SLIDE_STEP_N                       (8)
 
 #define STAR_DUAL_SLIDE_ADVANCE_TIME_MS         STAR_SLIDE_ADVANCE_TIME_MS
@@ -156,10 +157,22 @@ int DSC_OperateEmitter::emit_singal_btn(DS4_Controller* ctrl, int time_offset, N
     DS4_Operate op;
     op.cb = nullptr;
     
+    
     op.key = TBL_CONVERT[note->note_keycode];
-    op.val = 1;
+    
     op.time_left_ms = m_basetime + note->note_time_offset + BTN_SINGLE_PUSH_ADVANCE_TIME_MS;
+    
+    if((op.key == m_last_emit_key) && ((op.time_left_ms - m_last_emit_time) < BTN_SINGLE_EXCHANGE_THRES)){
+        op.key = BTN_CONVERT_R2L(op.key);
+    }
+    
+    m_last_emit_key = op.key;
+    m_last_emit_time = op.time_left_ms;
+    
+    op.val = 1;
     ctrl->insert_operate(op); // down
+    
+    
     
     op.val = 0;
     op.time_left_ms += BTN_SINGLE_HOLD_TIME_MS;
@@ -193,12 +206,14 @@ int DSC_OperateEmitter::emit_hold(DS4_Controller* ctrl, int time_offset, Note* n
     op.cb = nullptr;
     
     op.key = TBL_CONVERT[note->note_keycode];
-    op.val = 1;
-    op.time_left_ms = m_basetime + note->note_time_offset + BTN_HOLD_ADVANCE_TIME_MS;
-    ctrl->insert_operate(op); // down
-    
-    op.val = 0;
-    op.time_left_ms += convert_time_to_ms(note->note_hold_length) + BTN_HOLD_RELEASE_DELAY_TIME_MS;
+    if(note->note_hold_length != 0xffffffff) {
+        op.val = 1;
+        op.time_left_ms = m_basetime + note->note_time_offset + BTN_HOLD_ADVANCE_TIME_MS;
+    }else{
+        op.val = 0;
+        op.time_left_ms = m_basetime + note->note_time_offset + BTN_HOLD_RELEASE_DELAY_TIME_MS;
+    }
+
     ctrl->insert_operate(op); // up
     
     return 0;

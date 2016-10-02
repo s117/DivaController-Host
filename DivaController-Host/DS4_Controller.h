@@ -27,25 +27,25 @@ typedef struct __DS4_Operate{
     
     enum KEY_CODE{
         PS = 0,
-        BTN_TRIANGLE,
-        BTN_CIRCLE,
-        BTN_CROSS,
-        BTN_SQUARE,
-        SHLD_L1,
-        SHLD_R1,
-        DPAD_UP,
-        DPAD_RIGHT,
-        DPAD_DOWN,
-        DPAD_LEFT,
-        STICK_LS,
-        STICK_RS,
-        STICK_L_X_ANALOG,
-        STICK_L_Y_ANALOG,
-        STICK_R_X_ANALOG,
-        STICK_R_Y_ANALOG,
-        TRIGR_LT_ANALOG,
-        TRIGR_RT_ANALOG,
-        RESERVED,
+        BTN_TRIANGLE = 1,
+        BTN_CIRCLE = 2,
+        BTN_CROSS = 3,
+        BTN_SQUARE = 4,
+        SHLD_L1 = 5,
+        SHLD_R1 = 6,
+        DPAD_UP = 7,
+        DPAD_RIGHT = 8,
+        DPAD_DOWN = 9,
+        DPAD_LEFT = 10,
+        STICK_LS = 11,
+        STICK_RS = 12,
+        STICK_L_X_ANALOG = 13,
+        STICK_L_Y_ANALOG = 14,
+        STICK_R_X_ANALOG = 15,
+        STICK_R_Y_ANALOG = 16,
+        TRIGR_LT_ANALOG = 17,
+        TRIGR_RT_ANALOG = 18,
+        RESERVED = 19,
     };
 
     KEY_CODE key;
@@ -64,10 +64,11 @@ typedef struct __DS4_Output_List{
 
 class DS4_Controller{
 public:
-    DS4_Controller(GlobalTimer1ms *gt);
+    DS4_Controller();
     ~DS4_Controller();
     void insert_operate(DS4_Operate& op);
     void add_output(DS4_Output* new_output);
+    int start_timer();
     //void del_output;
     
     // following method is degsigned for trampoline function, DO NOT call this method explicitly
@@ -75,6 +76,7 @@ public:
     static void* dispatch_check(DS4_Controller* ctrl);
     bool isRunning();
 private:
+    uint64_t m_timestamp_start;
     pthread_t m_dispatcher_thread_id;
     bool m_isRunning;
     GlobalTimer1ms *m_gt;
