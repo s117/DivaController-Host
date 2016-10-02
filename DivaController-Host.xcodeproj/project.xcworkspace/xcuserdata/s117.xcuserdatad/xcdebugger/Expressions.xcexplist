@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "DS4_Controller::DS4_Controller(std::__1::list&lt;DS4_Output*, std::__1::allocator&lt;DS4_Output*&gt; &gt;, GlobalTimer1ms*):DS4_Controller.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "(void*)m_sem_ready">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DS4_Controller::insert_operate(__DS4_Operate&amp;):DS4_Controller.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "main:main.cpp">
+      </ContextState>
+      <ContextState
+         contextName = "DSC_OperateEmitter::emit(DSC_Info*, DS4_Controller*, int, bool):DSC_OperateEmitter.cpp">
+         <PersistentStrings>
+            <PersistentString
+               value = "it_ts.operator*()">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

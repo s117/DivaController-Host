@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "32C8E63E41DE7339596CCA44A3BBEC2E646BAF6E",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "32C8E63E41DE7339596CCA44A3BBEC2E646BAF6E" : 9223372036854775807,
+    "C05EC44EB9F8D3C664F02CACD2652FD86F13114E" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "531A2A38-68C7-4F32-ACEB-C38731B6D01E",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "32C8E63E41DE7339596CCA44A3BBEC2E646BAF6E" : "DivaController-Host\/",
+    "C05EC44EB9F8D3C664F02CACD2652FD86F13114E" : "DivaController-Host\/PVSC_Parser\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "DivaController-Host",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "DivaController-Host.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:s117\/DivaController-Host.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "32C8E63E41DE7339596CCA44A3BBEC2E646BAF6E"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/s117\/PVSC_Parser.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "C05EC44EB9F8D3C664F02CACD2652FD86F13114E"
+    }
+  ]
+}
