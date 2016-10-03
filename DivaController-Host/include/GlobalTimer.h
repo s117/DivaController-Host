@@ -20,15 +20,15 @@
 typedef void (*timer_routine)(void* data);
 typedef size_t gtimer_t;
 
-typedef struct __routine_record{
+typedef struct __routine_record {
     struct list_head list;
-    
+
     timer_routine entry;
     void* data;
     gtimer_t id;
 } routine_record_t;
 
-class GlobalTimer1ms{
+class GlobalTimer1ms {
 public:
     // DO NOT add a routine when the timer is running
     gtimer_t add_routine(timer_routine entry, void* data);
@@ -43,7 +43,7 @@ private:
     ~GlobalTimer1ms();
     gtimer_t id_alloc;
     static GlobalTimer1ms* global_instance;
-    
+
     bool running;
     struct itimerval itimer_val;
     pthread_mutex_t mutex_routine_list;

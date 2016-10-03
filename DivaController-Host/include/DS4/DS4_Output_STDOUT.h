@@ -10,7 +10,7 @@
 #define __H_DS4_OUTPUT_STDOUT
 #include "DS4_Output.h"
 
-class DS4_Output_STDOUT : public DS4_Output{
+class DS4_Output_STDOUT : public DS4_Output {
 public:
     virtual int write(const char* data, size_t len);
     virtual void flush();

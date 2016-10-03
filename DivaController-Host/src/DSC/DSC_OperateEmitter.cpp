@@ -71,73 +71,73 @@ const DS4_Operate::KEY_CODE TBL_CONVERT[] = {
     DS4_Operate::KEY_CODE::BTN_SQUARE,       //SQUARE_RUSH     = 0x1C,
 };
 
-static inline uint32_t convert_time_to_ms(uint32_t dsc_time){
+static inline uint32_t convert_time_to_ms(uint32_t dsc_time) {
     dsc_time = dsc_time/10;
-    if(dsc_time%10 >= 5){
+    if(dsc_time%10 >= 5) {
         return dsc_time/10+1;
-    }else{
+    } else {
         return dsc_time/10;
     }
 }
 
-int DSC_OperateEmitter::emit(DSC_Info* dsc, DS4_Controller* ctrl, int time_offset, bool is_salt){
-    if(!dsc || !ctrl){
+int DSC_OperateEmitter::emit(DSC_Info* dsc, DS4_Controller* ctrl, int time_offset, bool is_salt) {
+    if(!dsc || !ctrl) {
         return -1;
     }
     std::list<TimeStamp*>::iterator it_ts = dsc->event_seq.begin();
     std::list<Inst*>::iterator it_inst;
     Note* cur_note;
-    while(it_ts != dsc->event_seq.end()){
+    while(it_ts != dsc->event_seq.end()) {
         //TimeStamp* ts = *it_ts;
         (*it_ts)->time = convert_time_to_ms((*it_ts)->time);
         m_basetime = (*it_ts)->time + time_offset;
-        
+
         for(it_inst = (*it_ts)->inst_list.begin();
-            it_inst != (*it_ts)->inst_list.end();
-            ++it_inst){
-            if((*it_inst)->itype == Inst::InstType::NOTE){
+                it_inst != (*it_ts)->inst_list.end();
+                ++it_inst) {
+            if((*it_inst)->itype == Inst::InstType::NOTE) {
                 cur_note = (Note*)(*it_inst)->idata;
-                if(!is_note_valid(cur_note)){
+                if(!is_note_valid(cur_note)) {
                     perror("DSC to Controller interrupted: Invalid dsc note.\n");
                     return -1;
                 }
                 cur_note->note_time_offset = convert_time_to_ms(cur_note->note_time_offset);
-                switch(cur_note->note_keycode){
-                    case NOTE_KEYCODE::TRIANGLE:
-                    case NOTE_KEYCODE::CIRCLE:
-                    case NOTE_KEYCODE::CROSS:
-                    case NOTE_KEYCODE::SQUARE:
-                        emit_singal_btn(ctrl, time_offset, cur_note);
-                        break;
-                    case NOTE_KEYCODE::UP:
-                    case NOTE_KEYCODE::RIGHT:
-                    case NOTE_KEYCODE::DOWN:
-                    case NOTE_KEYCODE::LEFT:
-                        emit_dual_btn(ctrl, time_offset, cur_note);
-                        break;
-                    case NOTE_KEYCODE::TRIANGLE_LONG:
-                    case NOTE_KEYCODE::CIRCLE_LONG:
-                    case NOTE_KEYCODE::CROSS_LONG:
-                    case NOTE_KEYCODE::SQUARE_LONG:
-                        emit_hold(ctrl, time_offset, cur_note);
-                        break;
-                    case NOTE_KEYCODE::STAR:
-                        emit_star(ctrl, time_offset, cur_note);
-                        break;
-                    case NOTE_KEYCODE::STAR_DOUBLE:
-                    case NOTE_KEYCODE::STAR_CHANCE:
-                        emit_star_dual(ctrl, time_offset, cur_note);
-                        break;
-                    case NOTE_KEYCODE::STAR_LINE_START:
-                    case NOTE_KEYCODE::STAR_LINE_END:
-                        emit_star_line(ctrl, time_offset, cur_note);
-                        break;
-                    case NOTE_KEYCODE::TRIANGLE_RUSH:
-                    case NOTE_KEYCODE::CIRCLE_RUSH:
-                    case NOTE_KEYCODE::CROSS_RUSH:
-                    case NOTE_KEYCODE::SQUARE_RUSH:
-                        emit_rush(ctrl, time_offset, cur_note);
-                        break;
+                switch(cur_note->note_keycode) {
+                case NOTE_KEYCODE::TRIANGLE:
+                case NOTE_KEYCODE::CIRCLE:
+                case NOTE_KEYCODE::CROSS:
+                case NOTE_KEYCODE::SQUARE:
+                    emit_singal_btn(ctrl, time_offset, cur_note);
+                    break;
+                case NOTE_KEYCODE::UP:
+                case NOTE_KEYCODE::RIGHT:
+                case NOTE_KEYCODE::DOWN:
+                case NOTE_KEYCODE::LEFT:
+                    emit_dual_btn(ctrl, time_offset, cur_note);
+                    break;
+                case NOTE_KEYCODE::TRIANGLE_LONG:
+                case NOTE_KEYCODE::CIRCLE_LONG:
+                case NOTE_KEYCODE::CROSS_LONG:
+                case NOTE_KEYCODE::SQUARE_LONG:
+                    emit_hold(ctrl, time_offset, cur_note);
+                    break;
+                case NOTE_KEYCODE::STAR:
+                    emit_star(ctrl, time_offset, cur_note);
+                    break;
+                case NOTE_KEYCODE::STAR_DOUBLE:
+                case NOTE_KEYCODE::STAR_CHANCE:
+                    emit_star_dual(ctrl, time_offset, cur_note);
+                    break;
+                case NOTE_KEYCODE::STAR_LINE_START:
+                case NOTE_KEYCODE::STAR_LINE_END:
+                    emit_star_line(ctrl, time_offset, cur_note);
+                    break;
+                case NOTE_KEYCODE::TRIANGLE_RUSH:
+                case NOTE_KEYCODE::CIRCLE_RUSH:
+                case NOTE_KEYCODE::CROSS_RUSH:
+                case NOTE_KEYCODE::SQUARE_RUSH:
+                    emit_rush(ctrl, time_offset, cur_note);
+                    break;
                 }
             }
         }
@@ -146,85 +146,85 @@ int DSC_OperateEmitter::emit(DSC_Info* dsc, DS4_Controller* ctrl, int time_offse
     return 0;
 }
 
-int DSC_OperateEmitter::is_note_valid(Note* note){
+int DSC_OperateEmitter::is_note_valid(Note* note) {
     if(((note->note_keycode >=0x10) && (note->note_keycode <=0x15)) ||
-       (note->note_keycode > 0x1c))
+            (note->note_keycode > 0x1c))
         return 0;
     return 1;
 }
 
-int DSC_OperateEmitter::emit_singal_btn(DS4_Controller* ctrl, int time_offset, Note* note){
+int DSC_OperateEmitter::emit_singal_btn(DS4_Controller* ctrl, int time_offset, Note* note) {
     DS4_Operate op;
     op.cb = nullptr;
-    
-    
+
+
     op.key = TBL_CONVERT[note->note_keycode];
-    
+
     op.time_left_ms = m_basetime + note->note_time_offset + BTN_SINGLE_PUSH_ADVANCE_TIME_MS;
-    
-    if((op.key == m_last_emit_key) && ((op.time_left_ms - m_last_emit_time) < BTN_SINGLE_EXCHANGE_THRES)){
+
+    if((op.key == m_last_emit_key) && ((op.time_left_ms - m_last_emit_time) < BTN_SINGLE_EXCHANGE_THRES)) {
         op.key = BTN_CONVERT_R2L(op.key);
     }
-    
+
     m_last_emit_key = op.key;
     m_last_emit_time = op.time_left_ms;
-    
+
     op.val = 1;
     ctrl->insert_operate(op); // down
-    
-    
-    
+
+
+
     op.val = 0;
     op.time_left_ms += BTN_SINGLE_HOLD_TIME_MS;
     ctrl->insert_operate(op); // up
-    
+
     return 0;
 }
 
-int DSC_OperateEmitter::emit_dual_btn(DS4_Controller* ctrl, int time_offset, Note* note){
+int DSC_OperateEmitter::emit_dual_btn(DS4_Controller* ctrl, int time_offset, Note* note) {
     DS4_Operate op;
     op.cb = nullptr;
-    
+
     op.key = TBL_CONVERT[note->note_keycode];
     op.val = 1;
     op.time_left_ms = m_basetime + note->note_time_offset + BTN_DUAL_PUSH_ADVANCE_TIME_MS;
     ctrl->insert_operate(op); // down DPAD
     op.key = BTN_CONVERT_L2R(op.key);
     ctrl->insert_operate(op); // down BTN
-    
+
     op.val = 0;
     op.time_left_ms += BTN_DUAL_HOLD_TIME_MS;
     ctrl->insert_operate(op); // up BTN
     op.key = BTN_CONVERT_R2L(op.key);
     ctrl->insert_operate(op); // up DPAD
-    
+
     return 0;
 }
 
-int DSC_OperateEmitter::emit_hold(DS4_Controller* ctrl, int time_offset, Note* note){
+int DSC_OperateEmitter::emit_hold(DS4_Controller* ctrl, int time_offset, Note* note) {
     DS4_Operate op;
     op.cb = nullptr;
-    
+
     op.key = TBL_CONVERT[note->note_keycode];
     if(note->note_hold_length != 0xffffffff) {
         op.val = 1;
         op.time_left_ms = m_basetime + note->note_time_offset + BTN_HOLD_ADVANCE_TIME_MS;
-    }else{
+    } else {
         op.val = 0;
         op.time_left_ms = m_basetime + note->note_time_offset + BTN_HOLD_RELEASE_DELAY_TIME_MS;
     }
 
     ctrl->insert_operate(op); // up
-    
+
     return 0;
 }
 
-int DSC_OperateEmitter::emit_star(DS4_Controller* ctrl, int time_offset, Note* note){
+int DSC_OperateEmitter::emit_star(DS4_Controller* ctrl, int time_offset, Note* note) {
     assert(STAR_SLIDE_WINDOW_MS%STAR_SLIDE_STEP_N == 0);
     DS4_Operate op;
     op.key = TBL_CONVERT[note->note_keycode];
     op.cb = nullptr;
-    
+
     int window = STAR_SLIDE_WINDOW_MS, step = STAR_SLIDE_STEP_N;
     int operate_interval = window/step;
     int operate_dac_step = (STICK_DAC_MAX-STICK_DAC_MID)/step;
@@ -233,12 +233,12 @@ int DSC_OperateEmitter::emit_star(DS4_Controller* ctrl, int time_offset, Note* n
     op.val = dac;
     op.time_left_ms = start_time;
     ctrl->insert_operate(op);
-    for(int i = 0;i<step;++i){
+    for(int i = 0; i<step; ++i) {
         op.val += operate_dac_step;
         op.time_left_ms += operate_interval;
         ctrl->insert_operate(op);
     }
-    for(int i = 0;i<step-1;++i){
+    for(int i = 0; i<step-1; ++i) {
         op.val -= operate_dac_step;
         op.time_left_ms += operate_interval;
         ctrl->insert_operate(op);
@@ -246,17 +246,17 @@ int DSC_OperateEmitter::emit_star(DS4_Controller* ctrl, int time_offset, Note* n
     op.val = STICK_DAC_MID;
     op.time_left_ms += operate_interval;
     ctrl->insert_operate(op);
-    
+
     return 0;
 }
 
 
-int DSC_OperateEmitter::emit_star_dual(DS4_Controller* ctrl, int time_offset, Note* note){
+int DSC_OperateEmitter::emit_star_dual(DS4_Controller* ctrl, int time_offset, Note* note) {
     assert(STAR_DUAL_SLIDE_WINDOW_MS%STAR_DUAL_SLIDE_STEP_N == 0);
     DS4_Operate op;
     op.key = TBL_CONVERT[note->note_keycode];
     op.cb = nullptr;
-    
+
     int window = STAR_DUAL_SLIDE_WINDOW_MS, step = STAR_DUAL_SLIDE_STEP_N;
     int operate_interval = window/step;
     int operate_dac_step = (STICK_DAC_MAX - STICK_DAC_MID)/step;
@@ -267,15 +267,15 @@ int DSC_OperateEmitter::emit_star_dual(DS4_Controller* ctrl, int time_offset, No
     ctrl->insert_operate(op);
     op.key = STIWCH_STICK(op.key);
     ctrl->insert_operate(op);
-    
-    for(int i = 0;i<step;++i){
+
+    for(int i = 0; i<step; ++i) {
         op.val += operate_dac_step;
         op.time_left_ms += operate_interval;
         ctrl->insert_operate(op);
         op.key = STIWCH_STICK(op.key);
         ctrl->insert_operate(op);
     }
-    for(int i = 0;i<step-1;++i){
+    for(int i = 0; i<step-1; ++i) {
         op.val -= operate_dac_step;
         op.time_left_ms += operate_interval;
         ctrl->insert_operate(op);
@@ -290,42 +290,42 @@ int DSC_OperateEmitter::emit_star_dual(DS4_Controller* ctrl, int time_offset, No
     return 0;
 }
 
-int DSC_OperateEmitter::emit_star_line(DS4_Controller* ctrl, int time_offset, Note* note){
+int DSC_OperateEmitter::emit_star_line(DS4_Controller* ctrl, int time_offset, Note* note) {
     assert(0);
     return 0;
 }
 
-int DSC_OperateEmitter::emit_rush(DS4_Controller* ctrl, int time_offset, Note* note){
+int DSC_OperateEmitter::emit_rush(DS4_Controller* ctrl, int time_offset, Note* note) {
     DS4_Operate op1;
     DS4_Operate op2;
     op1.cb = nullptr;
     op2.cb = nullptr;
     op1.key = TBL_CONVERT[note->note_keycode];
     op2.key = BTN_CONVERT_R2L(op1.key);
-    
+
     op1.val = 1;
     op1.time_left_ms = m_basetime + note->note_time_offset + RUSH_PUSH_ADVANCE_TIME_MS;
-    
+
     op2.val = 1;
     op2.time_left_ms = m_basetime + note->note_time_offset + RUSH_PUSH_ADVANCE_TIME_MS+(RUSH_INVERVAL_MS/2);
-    
+
     int step = convert_time_to_ms(note->note_hold_length)/RUSH_INVERVAL_MS;
     step = step*2;
-    for(int i = 0; i < step;++i){
+    for(int i = 0; i < step; ++i) {
         ctrl->insert_operate(op1);
         op1.val = !op1.val;
         op1.time_left_ms += RUSH_INVERVAL_MS/2;
-        if(RUSH_IS_DUAL){
+        if(RUSH_IS_DUAL) {
             ctrl->insert_operate(op2);
             op2.val = !op2.val;
             op2.time_left_ms += RUSH_INVERVAL_MS/2;
         }
-        
+
     }
     return 0;
 }
 
-int DSC_OperateEmitter::salt_generator(bool is_salt){
+int DSC_OperateEmitter::salt_generator(bool is_salt) {
     return 0;
 }
 

@@ -9,14 +9,14 @@
 #include "DS4_Output_STDOUT.h"
 #include <stdio.h>
 
-int DS4_Output_STDOUT::write(const char* data, size_t len){
-    for(int i = 0;i<len;++i){
+int DS4_Output_STDOUT::write(const char* data, size_t len) {
+    for(int i = 0; i<len; ++i) {
         fputc(data[i], stdout);
     }
     return 0;
 }
 
-void DS4_Output_STDOUT::flush(){
+void DS4_Output_STDOUT::flush() {
     fflush(stdout);
 }
 

@@ -20,32 +20,32 @@ int SerialPort::openport(const char* com, speed_t baudrate, bool rawRead) {
     tcgetattr(serialfd, &options);
     cfsetispeed(&options, baudrate);
     cfsetospeed(&options, baudrate);
-    
+
     //control:
     options.c_cflag |= (CLOCAL | CREAD); // Enable the receiver and set local mode...
-    
+
     options.c_cflag &= ~CSIZE;
     options.c_cflag |= CS8; // 8 Data bit
     options.c_cflag &= ~PARENB; // No parity bit
     options.c_cflag &= ~CSTOPB; // 1 Stop bit
-    
-    
+
+
 #ifdef CNEW_RTSCTS
     options.c_cflag &= ~CNEW_RTSCTS; // Disable hardware flow control, for some platform only
 #endif
-    
+
     //local:
     if (rawRead) {//raw input mode
         options.c_lflag &= ~(ICANON | ECHO | ECHOE | ISIG);
     } else {//classic input mode (line mode)
         options.c_lflag |= (ICANON | ECHO | ECHOE);
     }
-    
+
     //input data:
     //options.c_iflag |= (INPCK | ISTRIP);// Perform parity check, and strip parity bit
     options.c_iflag &= ~INPCK; // Not perform parity check for input data
     options.c_iflag &= ~(IXON | IXOFF | IXANY); // Disable software flow control
-    
+
     //output data:
     options.c_oflag &= ~OPOST; // Output raw data
     options.c_cc[VTIME] = 150; // Set timeout 15 seconds
@@ -64,7 +64,7 @@ int SerialPort::closeport() {
         serialfd = -1;
     }
     return SERIAL_OK;
-    
+
 }
 
 //write data to port, return bytes written
@@ -85,7 +85,7 @@ ssize_t SerialPort::readport(void *buf, size_t nbytes) {
         //printf("read ok,nbytes=%d\n",nbytes);
         return read(serialfd, buf, nbytes);
     }
-    
+
 }
 
 size_t SerialPort::readfix(void* buf, size_t nbytes) {
@@ -137,11 +137,11 @@ int SerialPort::set_timeout(int timeout) {
     struct termios options;
     if (serialfd < 0)
         return SERIAL_ERROR_ILLEGAL_STATE;
-    
+
     tcgetattr(serialfd, &options);
-    
+
     options.c_cc[VTIME] = timeout; // Set timeout 15 seconds
-    
+
     if (tcsetattr(serialfd, TCSANOW, &options) != 0)// Apply setting
         return SERIAL_ERROR_SET_FAIL;
     else

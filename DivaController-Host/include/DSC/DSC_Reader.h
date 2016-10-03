@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include "PVSC_Parser.h"
 
-class DSC_Reader{
+class DSC_Reader {
 public:
     static DSC_Info* read_dsc(const char* path);
 };

@@ -14,10 +14,15 @@
 #include <stdio.h>
 #include "PVSC_Parser.h"
 #include "DS4_Controller.h"
+#include "list.h"
+
+typedef struct __section_data {
+    struct list_head list;
+    uint32_t section_offset;
+} section_data_t;
 
 
-
-class DSC_OperateEmitter{
+class DSC_OperateEmitter {
 public:
     int emit(DSC_Info* dsc, DS4_Controller* ctrl, int time_offset, bool is_salt);
 private:
@@ -30,12 +35,12 @@ private:
     int emit_star_line(DS4_Controller* ctrl, int time_offset, Note* note);
     int emit_rush(DS4_Controller* ctrl, int time_offset, Note* note);
     int salt_generator(bool is_salt);
-    
+
     int m_salt_param;
     uint32_t m_basetime;
     DS4_Operate::KEY_CODE m_last_emit_key;
     uint32_t m_last_emit_time;
-    
+
     //DS4_Controller* m_ctrl;
 };
 #endif /* DSC_Reader_hpp */

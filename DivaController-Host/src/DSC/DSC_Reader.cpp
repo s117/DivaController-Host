@@ -10,16 +10,16 @@
 #include "utils.h"
 #include "stdlib.h"
 
-DSC_Info* DSC_Reader::read_dsc(const char* path){
+DSC_Info* DSC_Reader::read_dsc(const char* path) {
     size_t file_len;
     uint8_t* file = get_file_content(path, &file_len);
-    if(file == NULL){
+    if(file == NULL) {
         return NULL;
     }
     PVSC_Parser* parser = new PVSC_Parser();
     DSC_Info *info = new DSC_Info;
     STEP rtnval = parser->parse_dsc(info, file, (uint32_t)file_len);
-    if(rtnval != STEP_END_OF_SEQUENCE){
+    if(rtnval != STEP_END_OF_SEQUENCE) {
         free(file);
         delete parser;
         delete info;

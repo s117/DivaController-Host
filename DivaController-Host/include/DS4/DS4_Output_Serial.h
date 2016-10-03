@@ -14,7 +14,7 @@
 #define DS4_OUTPUT_SERIAL_COM_N "/dev/cu.usbserial"
 #define DS4_OUTPUT_SERIAL_BUAD  B230400
 
-class DS4_Output_Serial : public DS4_Output{
+class DS4_Output_Serial : public DS4_Output {
 public:
     DS4_Output_Serial();
     ~DS4_Output_Serial();

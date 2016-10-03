@@ -7,17 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		13AFFD491D9DABC700CAA14E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 13AFFD481D9DABC700CAA14E /* main.cpp */; };
+		135158711DA2436800C9C717 /* DS4_Controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 135158671DA2436800C9C717 /* DS4_Controller.cpp */; };
+		135158721DA2436800C9C717 /* DS4_Output_Serial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 135158681DA2436800C9C717 /* DS4_Output_Serial.cpp */; };
+		135158731DA2436800C9C717 /* DS4_Output_STDOUT.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 135158691DA2436800C9C717 /* DS4_Output_STDOUT.cpp */; };
+		135158741DA2436800C9C717 /* DSC_OperateEmitter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1351586B1DA2436800C9C717 /* DSC_OperateEmitter.cpp */; };
+		135158751DA2436800C9C717 /* DSC_Reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1351586C1DA2436800C9C717 /* DSC_Reader.cpp */; };
+		135158761DA2436800C9C717 /* GlobalTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1351586D1DA2436800C9C717 /* GlobalTimer.cpp */; };
+		135158771DA2436800C9C717 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1351586E1DA2436800C9C717 /* main.cpp */; };
+		135158781DA2436800C9C717 /* SerialPort.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1351586F1DA2436800C9C717 /* SerialPort.cpp */; };
+		135158791DA2436800C9C717 /* utils.c in Sources */ = {isa = PBXBuildFile; fileRef = 135158701DA2436800C9C717 /* utils.c */; };
 		13AFFD571D9DAC4600CAA14E /* libPVSC_Parser.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 13AFFD561D9DAC2300CAA14E /* libPVSC_Parser.a */; };
-		13CAC8F81DA1024100580D3E /* SerialPort.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 13CAC8F61DA1024100580D3E /* SerialPort.cpp */; };
-		13F40D4A1D9F8AE3006EA021 /* GlobalTimer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 13F40D491D9F8AE3006EA021 /* GlobalTimer.cpp */; };
 		13F7F5A21D9E44E700E69D66 /* libpthread.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 13F7F5A11D9E44E700E69D66 /* libpthread.tbd */; };
-		13F7F5B31D9E455500E69D66 /* utils.c in Sources */ = {isa = PBXBuildFile; fileRef = 13F7F5AD1D9E455500E69D66 /* utils.c */; };
-		13F7F5B41D9E455500E69D66 /* DS4_Controller.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 13F7F5AE1D9E455500E69D66 /* DS4_Controller.cpp */; };
-		13F7F5B51D9E455500E69D66 /* DS4_Output_Serial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 13F7F5AF1D9E455500E69D66 /* DS4_Output_Serial.cpp */; };
-		13F7F5B61D9E455500E69D66 /* DS4_Output_STDOUT.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 13F7F5B01D9E455500E69D66 /* DS4_Output_STDOUT.cpp */; };
-		13F7F5B71D9E455500E69D66 /* DSC_OperateEmitter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 13F7F5B11D9E455500E69D66 /* DSC_OperateEmitter.cpp */; };
-		13F7F5B81D9E455500E69D66 /* DSC_Reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 13F7F5B21D9E455500E69D66 /* DSC_Reader.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,29 +43,28 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		133A62A41D9FC2A9009A1E79 /* list.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = list.h; sourceTree = "<group>"; };
+		1351585A1DA2436800C9C717 /* DS4_Controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DS4_Controller.h; sourceTree = "<group>"; };
+		1351585B1DA2436800C9C717 /* DS4_Output.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DS4_Output.h; sourceTree = "<group>"; };
+		1351585C1DA2436800C9C717 /* DS4_Output_Serial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DS4_Output_Serial.h; sourceTree = "<group>"; };
+		1351585D1DA2436800C9C717 /* DS4_Output_STDOUT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DS4_Output_STDOUT.h; sourceTree = "<group>"; };
+		1351585F1DA2436800C9C717 /* DSC_OperateEmitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSC_OperateEmitter.h; sourceTree = "<group>"; };
+		135158601DA2436800C9C717 /* DSC_Reader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSC_Reader.h; sourceTree = "<group>"; };
+		135158611DA2436800C9C717 /* GlobalTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalTimer.h; sourceTree = "<group>"; };
+		135158621DA2436800C9C717 /* list.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = list.h; sourceTree = "<group>"; };
+		135158631DA2436800C9C717 /* SerialPort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SerialPort.h; sourceTree = "<group>"; };
+		135158641DA2436800C9C717 /* utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utils.h; sourceTree = "<group>"; };
+		135158671DA2436800C9C717 /* DS4_Controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DS4_Controller.cpp; sourceTree = "<group>"; };
+		135158681DA2436800C9C717 /* DS4_Output_Serial.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DS4_Output_Serial.cpp; sourceTree = "<group>"; };
+		135158691DA2436800C9C717 /* DS4_Output_STDOUT.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DS4_Output_STDOUT.cpp; sourceTree = "<group>"; };
+		1351586B1DA2436800C9C717 /* DSC_OperateEmitter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DSC_OperateEmitter.cpp; sourceTree = "<group>"; };
+		1351586C1DA2436800C9C717 /* DSC_Reader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DSC_Reader.cpp; sourceTree = "<group>"; };
+		1351586D1DA2436800C9C717 /* GlobalTimer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GlobalTimer.cpp; sourceTree = "<group>"; };
+		1351586E1DA2436800C9C717 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		1351586F1DA2436800C9C717 /* SerialPort.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SerialPort.cpp; sourceTree = "<group>"; };
+		135158701DA2436800C9C717 /* utils.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = utils.c; sourceTree = "<group>"; };
 		13AFFD451D9DABC700CAA14E /* DivaController-Host */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "DivaController-Host"; sourceTree = BUILT_PRODUCTS_DIR; };
-		13AFFD481D9DABC700CAA14E /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		13AFFD501D9DAC2300CAA14E /* PVSC_Parser.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = PVSC_Parser.xcodeproj; path = PVSC_Parser/PVSC_Parser.xcodeproj; sourceTree = "<group>"; };
-		13AFFD581D9DAD3000CAA14E /* pv_801_extreme.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = pv_801_extreme.h; sourceTree = "<group>"; };
-		13CAC8F61DA1024100580D3E /* SerialPort.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SerialPort.cpp; sourceTree = "<group>"; };
-		13CAC8F71DA1024100580D3E /* SerialPort.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SerialPort.h; sourceTree = "<group>"; };
-		13F40D481D9F8AE3006EA021 /* GlobalTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalTimer.h; sourceTree = "<group>"; };
-		13F40D491D9F8AE3006EA021 /* GlobalTimer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GlobalTimer.cpp; sourceTree = "<group>"; };
 		13F7F5A11D9E44E700E69D66 /* libpthread.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libpthread.tbd; path = usr/lib/libpthread.tbd; sourceTree = SDKROOT; };
-		13F7F5A61D9E455500E69D66 /* DS4_Controller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DS4_Controller.h; sourceTree = "<group>"; };
-		13F7F5A71D9E455500E69D66 /* DS4_Output_Serial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DS4_Output_Serial.h; sourceTree = "<group>"; };
-		13F7F5A81D9E455500E69D66 /* DS4_Output_STDOUT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DS4_Output_STDOUT.h; sourceTree = "<group>"; };
-		13F7F5A91D9E455500E69D66 /* DS4_Output.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DS4_Output.h; sourceTree = "<group>"; };
-		13F7F5AA1D9E455500E69D66 /* DSC_OperateEmitter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSC_OperateEmitter.h; sourceTree = "<group>"; };
-		13F7F5AB1D9E455500E69D66 /* DSC_Reader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DSC_Reader.h; sourceTree = "<group>"; };
-		13F7F5AC1D9E455500E69D66 /* utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utils.h; sourceTree = "<group>"; };
-		13F7F5AD1D9E455500E69D66 /* utils.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = utils.c; sourceTree = "<group>"; };
-		13F7F5AE1D9E455500E69D66 /* DS4_Controller.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DS4_Controller.cpp; sourceTree = "<group>"; };
-		13F7F5AF1D9E455500E69D66 /* DS4_Output_Serial.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DS4_Output_Serial.cpp; sourceTree = "<group>"; };
-		13F7F5B01D9E455500E69D66 /* DS4_Output_STDOUT.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DS4_Output_STDOUT.cpp; sourceTree = "<group>"; };
-		13F7F5B11D9E455500E69D66 /* DSC_OperateEmitter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DSC_OperateEmitter.cpp; sourceTree = "<group>"; };
-		13F7F5B21D9E455500E69D66 /* DSC_Reader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DSC_Reader.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,10 +80,84 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		135158571DA2436800C9C717 /* DivaController-Host */ = {
+			isa = PBXGroup;
+			children = (
+				135158581DA2436800C9C717 /* include */,
+				135158651DA2436800C9C717 /* src */,
+			);
+			path = "DivaController-Host";
+			sourceTree = "<group>";
+		};
+		135158581DA2436800C9C717 /* include */ = {
+			isa = PBXGroup;
+			children = (
+				135158591DA2436800C9C717 /* DS4 */,
+				1351585E1DA2436800C9C717 /* DSC */,
+				135158611DA2436800C9C717 /* GlobalTimer.h */,
+				135158621DA2436800C9C717 /* list.h */,
+				135158631DA2436800C9C717 /* SerialPort.h */,
+				135158641DA2436800C9C717 /* utils.h */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		135158591DA2436800C9C717 /* DS4 */ = {
+			isa = PBXGroup;
+			children = (
+				1351585A1DA2436800C9C717 /* DS4_Controller.h */,
+				1351585B1DA2436800C9C717 /* DS4_Output.h */,
+				1351585C1DA2436800C9C717 /* DS4_Output_Serial.h */,
+				1351585D1DA2436800C9C717 /* DS4_Output_STDOUT.h */,
+			);
+			path = DS4;
+			sourceTree = "<group>";
+		};
+		1351585E1DA2436800C9C717 /* DSC */ = {
+			isa = PBXGroup;
+			children = (
+				1351585F1DA2436800C9C717 /* DSC_OperateEmitter.h */,
+				135158601DA2436800C9C717 /* DSC_Reader.h */,
+			);
+			path = DSC;
+			sourceTree = "<group>";
+		};
+		135158651DA2436800C9C717 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				135158661DA2436800C9C717 /* DS4 */,
+				1351586A1DA2436800C9C717 /* DSC */,
+				1351586D1DA2436800C9C717 /* GlobalTimer.cpp */,
+				1351586E1DA2436800C9C717 /* main.cpp */,
+				1351586F1DA2436800C9C717 /* SerialPort.cpp */,
+				135158701DA2436800C9C717 /* utils.c */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		135158661DA2436800C9C717 /* DS4 */ = {
+			isa = PBXGroup;
+			children = (
+				135158671DA2436800C9C717 /* DS4_Controller.cpp */,
+				135158681DA2436800C9C717 /* DS4_Output_Serial.cpp */,
+				135158691DA2436800C9C717 /* DS4_Output_STDOUT.cpp */,
+			);
+			path = DS4;
+			sourceTree = "<group>";
+		};
+		1351586A1DA2436800C9C717 /* DSC */ = {
+			isa = PBXGroup;
+			children = (
+				1351586B1DA2436800C9C717 /* DSC_OperateEmitter.cpp */,
+				1351586C1DA2436800C9C717 /* DSC_Reader.cpp */,
+			);
+			path = DSC;
+			sourceTree = "<group>";
+		};
 		13AFFD3C1D9DABC700CAA14E = {
 			isa = PBXGroup;
 			children = (
-				13AFFD471D9DABC700CAA14E /* DivaController-Host */,
+				135158571DA2436800C9C717 /* DivaController-Host */,
 				13AFFD461D9DABC700CAA14E /* Products */,
 				13AFFD4F1D9DAC2300CAA14E /* Frameworks */,
 			);
@@ -96,33 +169,6 @@
 				13AFFD451D9DABC700CAA14E /* DivaController-Host */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		13AFFD471D9DABC700CAA14E /* DivaController-Host */ = {
-			isa = PBXGroup;
-			children = (
-				13F7F5A61D9E455500E69D66 /* DS4_Controller.h */,
-				133A62A41D9FC2A9009A1E79 /* list.h */,
-				13F7F5A71D9E455500E69D66 /* DS4_Output_Serial.h */,
-				13CAC8F61DA1024100580D3E /* SerialPort.cpp */,
-				13CAC8F71DA1024100580D3E /* SerialPort.h */,
-				13F7F5A81D9E455500E69D66 /* DS4_Output_STDOUT.h */,
-				13F7F5A91D9E455500E69D66 /* DS4_Output.h */,
-				13F7F5AA1D9E455500E69D66 /* DSC_OperateEmitter.h */,
-				13F40D481D9F8AE3006EA021 /* GlobalTimer.h */,
-				13F40D491D9F8AE3006EA021 /* GlobalTimer.cpp */,
-				13F7F5AB1D9E455500E69D66 /* DSC_Reader.h */,
-				13F7F5AC1D9E455500E69D66 /* utils.h */,
-				13F7F5AD1D9E455500E69D66 /* utils.c */,
-				13F7F5AE1D9E455500E69D66 /* DS4_Controller.cpp */,
-				13F7F5AF1D9E455500E69D66 /* DS4_Output_Serial.cpp */,
-				13F7F5B01D9E455500E69D66 /* DS4_Output_STDOUT.cpp */,
-				13F7F5B11D9E455500E69D66 /* DSC_OperateEmitter.cpp */,
-				13F7F5B21D9E455500E69D66 /* DSC_Reader.cpp */,
-				13AFFD481D9DABC700CAA14E /* main.cpp */,
-				13AFFD581D9DAD3000CAA14E /* pv_801_extreme.h */,
-			);
-			path = "DivaController-Host";
 			sourceTree = "<group>";
 		};
 		13AFFD4F1D9DAC2300CAA14E /* Frameworks */ = {
@@ -215,15 +261,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				13F7F5B81D9E455500E69D66 /* DSC_Reader.cpp in Sources */,
-				13F7F5B51D9E455500E69D66 /* DS4_Output_Serial.cpp in Sources */,
-				13F40D4A1D9F8AE3006EA021 /* GlobalTimer.cpp in Sources */,
-				13F7F5B41D9E455500E69D66 /* DS4_Controller.cpp in Sources */,
-				13F7F5B71D9E455500E69D66 /* DSC_OperateEmitter.cpp in Sources */,
-				13AFFD491D9DABC700CAA14E /* main.cpp in Sources */,
-				13F7F5B31D9E455500E69D66 /* utils.c in Sources */,
-				13F7F5B61D9E455500E69D66 /* DS4_Output_STDOUT.cpp in Sources */,
-				13CAC8F81DA1024100580D3E /* SerialPort.cpp in Sources */,
+				135158721DA2436800C9C717 /* DS4_Output_Serial.cpp in Sources */,
+				135158731DA2436800C9C717 /* DS4_Output_STDOUT.cpp in Sources */,
+				135158761DA2436800C9C717 /* GlobalTimer.cpp in Sources */,
+				135158791DA2436800C9C717 /* utils.c in Sources */,
+				135158751DA2436800C9C717 /* DSC_Reader.cpp in Sources */,
+				135158781DA2436800C9C717 /* SerialPort.cpp in Sources */,
+				135158771DA2436800C9C717 /* main.cpp in Sources */,
+				135158741DA2436800C9C717 /* DSC_OperateEmitter.cpp in Sources */,
+				135158711DA2436800C9C717 /* DS4_Controller.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

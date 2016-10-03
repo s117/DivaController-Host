@@ -15,24 +15,24 @@ uint8_t* get_file_content(const char *path, size_t *len) {
     uint8_t *p_buffer = NULL;
     size_t file_len = 0;
     FILE *fp = fopen(path, "rb");
-    
+
     if (fp == NULL)
         return NULL;
-    
+
     fseek(fp, 0, SEEK_END);
     file_len = ftell(fp);
     rewind(fp);
-    
+
     p_buffer = (uint8_t*)malloc(sizeof(uint8_t) * file_len);
     if (p_buffer == NULL) {
         fclose(fp);
         fprintf(stderr, "fail to allocate memory.\n");
         return 0;
     }
-    
+
     file_len = fread(p_buffer, sizeof(uint8_t), file_len, fp);
     fclose(fp);
-    
+
     *len = file_len;
     return p_buffer;
 }
@@ -44,7 +44,7 @@ int write_to_file(const char* path, uint8_t* data, size_t len) {
     if (fwrite(data, 1, len, fp) != len) {
         return 0;
     }
-    
+
     fflush(fp);
     fclose(fp);
     return 1;
@@ -52,7 +52,7 @@ int write_to_file(const char* path, uint8_t* data, size_t len) {
 
 int end_with(const char * str, const char * end) {
     int result = 0;
-    
+
     if (str != NULL && end != NULL) {
         int l1 = strlen(str);
         int l2 = strlen(end);

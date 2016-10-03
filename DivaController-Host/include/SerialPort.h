@@ -30,7 +30,7 @@ public:
     int set_timeout(int timeout);
 private:
     int serialfd;
-    
+
 };
 
 #endif // SERIALPORT_H

@@ -21,13 +21,13 @@
 #endif
 
 #ifdef __cplusplus
-extern "C"{
+extern "C" {
 #endif
 
 EXTERN int end_with(const char * str, const char * end);
 EXTERN uint8_t* get_file_content(const char *path, size_t *len);
 EXTERN int write_to_file(const char* path, uint8_t* data, size_t len);
-    
+
 #ifdef __cplusplus
 }
 #endif
