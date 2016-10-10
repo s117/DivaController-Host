@@ -7,17 +7,59 @@
 //
 
 #include "GlobalTimer.h"
-
-
 #include <signal.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <mach/mach.h>
+#include <mach/mach_time.h>
 
-static void sigroutine(int dunno) {
+static void handle_error_en(int i, const char* info) {
+    fprintf(stderr, "[%p] Error: %s return %d\n", pthread_self(), info, i);
+    exit(-1);
+}
+
+static void sig_routine(int dunno) {
     switch (dunno) {
     case SIGALRM:
         GlobalTimer1ms::tick();
         break;
     }
     return;
+}
+
+static void* tick_thread_routine(void* arg) {
+    sigset_t *set = (sigset_t*)arg;
+    int s;
+    s = pthread_sigmask(SIG_UNBLOCK, set, NULL);
+    if (s != 0)
+        handle_error_en(s, "pthread_sigmask");
+    for(;;) {
+        pthread_testcancel();
+        pause();
+    }
+}
+
+static void move_pthread_to_realtime_scheduling_class(pthread_t pthread) {
+    mach_timebase_info_data_t timebase_info;
+    mach_timebase_info(&timebase_info);
+
+    const uint64_t NANOS_PER_MSEC = 1000000ULL;
+    double clock2abs = ((double)timebase_info.denom / (double)timebase_info.numer) * NANOS_PER_MSEC;
+
+    thread_time_constraint_policy_data_t policy;
+    policy.period      = 0;
+    policy.computation = (uint32_t)(5 * clock2abs); // 5 ms of work
+    policy.constraint  = (uint32_t)(10 * clock2abs);
+    policy.preemptible = FALSE;
+
+    int kr = thread_policy_set(pthread_mach_thread_np(pthread_self()),
+                               THREAD_TIME_CONSTRAINT_POLICY,
+                               (thread_policy_t)&policy,
+                               THREAD_TIME_CONSTRAINT_POLICY_COUNT);
+    if (kr != KERN_SUCCESS) {
+        mach_error("thread_policy_set:", kr);
+        exit(1);
+    }
 }
 
 #define INVERTAL_S  0
@@ -33,6 +75,27 @@ GlobalTimer1ms::GlobalTimer1ms() {
     this->itimer_val.it_value.tv_usec = INVERTAL_US;
     this->itimer_val.it_interval.tv_sec = INVERTAL_S;
     this->itimer_val.it_interval.tv_usec = INVERTAL_US;
+
+    // change the way how thread handle the SIGALRM
+    int s;
+    struct sigaction sigact;
+    sigemptyset( &sigact.sa_mask );
+    sigact.sa_flags = 0;
+    sigact.sa_handler = sig_routine;
+    sigaction( SIGALRM, &sigact, NULL );
+
+    sigset_t set;
+    sigemptyset(&set);
+    sigaddset(&set, SIGALRM);
+    s = pthread_sigmask(SIG_BLOCK, &set, &old_main_set); // BLOCK the SIGALRM for main thread
+    if (s != 0)
+        handle_error_en(s, "pthread_sigmask");
+
+    s = pthread_create(&tick_thread, NULL, tick_thread_routine, (void *) &set); // create a dedicated thread for SIGALRM
+    if (s != 0)
+        handle_error_en(s, "pthread_create");
+
+    move_pthread_to_realtime_scheduling_class(pthread_self()); // move SIGALRM handle thread to realtime scheduling class
 }
 
 
@@ -48,6 +111,10 @@ GlobalTimer1ms::~GlobalTimer1ms() {
     this->itimer_val.it_interval.tv_sec = 0;
     this->itimer_val.it_interval.tv_usec = 0;
     setitimer(ITIMER_REAL, &itimer_val, NULL);
+
+    pthread_cancel(tick_thread); // cancel the SIGALRM dedicated thread
+    pthread_join(tick_thread, NULL); // wait thread terminated
+    pthread_sigmask(SIG_SETMASK, &old_main_set, NULL); // recover main thread's old signal mask
 }
 
 GlobalTimer1ms* GlobalTimer1ms::get_instance() {
@@ -91,12 +158,6 @@ void GlobalTimer1ms::start_timer() {
     }
     this->running = true;
 
-    struct sigaction sigact;
-    sigemptyset( &sigact.sa_mask );
-    sigact.sa_flags = 0;
-    sigact.sa_handler = sigroutine;
-    sigaction( SIGALRM, &sigact, NULL );
-
     this->itimer_val.it_value.tv_sec = INVERTAL_S;
     this->itimer_val.it_value.tv_usec = INVERTAL_US;
     this->itimer_val.it_interval.tv_sec = INVERTAL_S;
@@ -127,7 +188,4 @@ void GlobalTimer1ms::tick() {
     list_for_each_entry(cursor, &gt->routine_list, list) {
         cursor->entry(cursor->data);
     }
-//    for(std::list<routine_record>::iterator it = gt->routine_list.begin();it != gt->routine_list.end(); ++it){
-//        it->entry(it->data);
-//    }
 }

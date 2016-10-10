@@ -20,26 +20,26 @@ static inline uint64_t convert_us_to_ms(uint64_t us) {
 }
 
 static const char* const TBL_CTRL_CODE_PATTERN[] = {
-    "A%03hhu",
-    "B%03hhu",
-    "C%03hhu",
-    "D%03hhu",
-    "E%03hhu",
-    "F%03hhu",
-    "G%03hhu",
-    "H%03hhu",
-    "I%03hhu",
-    "J%03hhu",
-    "K%03hhu",
-    "L%03hhu",
-    "M%03hhu",
-    "N%03hhu",
-    "O%03hhu",
-    "P%03hhu",
-    "Q%03hhu",
-    "R%03hhu",
-    "S%03hhu",
-    "Z%03hhu",
+    "A%02hhx",
+    "B%02hhx",
+    "C%02hhx",
+    "D%02hhx",
+    "E%02hhx",
+    "F%02hhx",
+    "G%02hhx",
+    "H%02hhx",
+    "I%02hhx",
+    "J%02hhx",
+    "K%02hhx",
+    "L%02hhx",
+    "M%02hhx",
+    "N%02hhx",
+    "O%02hhx",
+    "Z%02hhx",
+    "P%02hhx",
+    "Q%02hhx",
+    "R%02hhx",
+    "S%02hhx",
 };
 static const int LEN_CTRL_CODE = 5;
 
@@ -73,7 +73,7 @@ static void move_pthread_to_realtime_scheduling_class(pthread_t pthread) {
         exit(1);
     }
 }
-
+static const char* sem_name = "/dscsemardy";
 DS4_Controller::DS4_Controller() {
     INIT_LIST_HEAD(&m_output_list);
 
@@ -85,8 +85,8 @@ DS4_Controller::DS4_Controller() {
 
     pthread_mutex_init(&m_mtx_tick, NULL);
     //sem_init(&m_sem_ready, 0, 0);
-    sem_unlink("/dscsemardy");
-    if ((m_sem_ready = sem_open("/dscsemardy", O_CREAT, 0644, 0)) == SEM_FAILED ) {
+    sem_unlink(sem_name);
+    if ((m_sem_ready = sem_open(sem_name, O_CREAT, 0644, 0)) == SEM_FAILED ) {
         perror("sem_open");
     }
 
@@ -103,7 +103,7 @@ DS4_Controller::~DS4_Controller() {
     m_isRunning = false;
     sem_post(m_sem_ready);
     pthread_join(m_dispatcher_thread_id, NULL);
-    sem_unlink("/dscsemardy");
+    sem_unlink(sem_name);
     sem_close(m_sem_ready);
 }
 
@@ -214,7 +214,7 @@ void* DS4_Controller::dispatch_check(DS4_Controller *ctrl) {
             cursor->output->write(buffer, 4);
             cursor->output->flush();
         }
-        if(op->cb) op->cb(*op);
+        if(op->cb) op->cb(op->cb_param);
         delete op;
 //        it = ctrl->m_output.begin();
 //        while(it != ctrl->m_output.end()){

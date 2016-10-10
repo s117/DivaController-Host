@@ -23,7 +23,7 @@
 
 typedef struct __DS4_Operate {
     struct list_head list;
-    typedef void(*cb_operate_done_t)(__DS4_Operate& op);
+    typedef void(*cb_operate_done_t)(void* param);
 
     enum KEY_CODE {
         PS = 0,
@@ -54,6 +54,7 @@ typedef struct __DS4_Operate {
     // when use as argument, this field use to indicate the delay of instruction emit,
     // when in pend queue, this field use as time differential chain
     uint32_t time_left_ms;
+    void* cb_param;
     cb_operate_done_t cb;
 } DS4_Operate;
 
@@ -69,7 +70,6 @@ public:
     void insert_operate(DS4_Operate& op);
     void add_output(DS4_Output* new_output);
     int start_timer();
-    //void del_output;
 
     // following method is degsigned for trampoline function, DO NOT call this method explicitly
     static void tick(DS4_Controller* ctrl);

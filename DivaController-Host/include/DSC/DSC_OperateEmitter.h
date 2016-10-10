@@ -24,19 +24,20 @@ typedef struct __section_data {
 
 class DSC_OperateEmitter {
 public:
-    int emit(DSC_Info* dsc, DS4_Controller* ctrl, int time_offset, bool is_salt);
+    DSC_OperateEmitter();
+    int64_t emit(DSC_Info* dsc, DS4_Controller* ctrl, int time_offset, bool is_salt);
 private:
     int is_note_valid(Note* note);
-    int emit_singal_btn(DS4_Controller* ctrl, int time_offset, Note* note);
-    int emit_dual_btn(DS4_Controller* ctrl, int time_offset, Note* note);
-    int emit_hold(DS4_Controller* ctrl, int time_offset, Note* note);
-    int emit_star(DS4_Controller* ctrl, int time_offset, Note* note);
-    int emit_star_dual(DS4_Controller* ctrl, int time_offset, Note* note);
-    int emit_star_line(DS4_Controller* ctrl, int time_offset, Note* note);
-    int emit_rush(DS4_Controller* ctrl, int time_offset, Note* note);
-    int salt_generator(bool is_salt);
+    int64_t emit_singal_btn(DS4_Controller* ctrl, int time_offset, Note* note);
+    int64_t emit_dual_btn(DS4_Controller* ctrl, int time_offset, Note* note);
+    int64_t emit_hold(DS4_Controller* ctrl, int time_offset, Note* note);
+    int64_t emit_star(DS4_Controller* ctrl, int time_offset, Note* note);
+    int64_t emit_star_dual(DS4_Controller* ctrl, int time_offset, Note* note);
+    int64_t emit_star_line(DS4_Controller* ctrl, int time_offset, Note* note);
+    int64_t emit_rush(DS4_Controller* ctrl, int time_offset, Note* note);
+    int gen_salt_ms();
 
-    int m_salt_param;
+    bool m_salt_param;
     uint32_t m_basetime;
     DS4_Operate::KEY_CODE m_last_emit_key;
     uint32_t m_last_emit_time;

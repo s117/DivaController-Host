@@ -48,6 +48,8 @@ private:
     struct itimerval itimer_val;
     pthread_mutex_t mutex_routine_list;
     struct list_head routine_list;
+    sigset_t old_main_set;
+    pthread_t tick_thread;
 };
 
 #endif /* GlobalTimer_hpp */

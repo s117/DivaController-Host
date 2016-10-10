@@ -39,6 +39,12 @@
 #define BTN_CONVERT_L2R(L)  ((DS4_Operate::KEY_CODE)((int)(L)-6))
 #define STIWCH_STICK(S)     ((S) == DS4_Operate::KEY_CODE::STICK_R_X_ANALOG ? \
                             DS4_Operate::KEY_CODE::STICK_L_X_ANALOG : DS4_Operate::KEY_CODE::STICK_R_X_ANALOG )
+
+//static void print_offset(void* off){
+//    //int f_opp = (int)(((uint64_t)off)&0xffffffff);
+//    //printf(", offset:%08x\n", f_opp);
+//}
+
 const DS4_Operate::KEY_CODE TBL_CONVERT[] = {
     DS4_Operate::KEY_CODE::BTN_TRIANGLE,     //TRIANGLE        = 0,
     DS4_Operate::KEY_CODE::BTN_CIRCLE,       //CIRCLE          = 1,
@@ -80,10 +86,18 @@ static inline uint32_t convert_time_to_ms(uint32_t dsc_time) {
     }
 }
 
-int DSC_OperateEmitter::emit(DSC_Info* dsc, DS4_Controller* ctrl, int time_offset, bool is_salt) {
+DSC_OperateEmitter::DSC_OperateEmitter() {
+    struct timeval tv;
+    gettimeofday(&tv, NULL);
+    srand(tv.tv_usec);
+}
+
+int64_t DSC_OperateEmitter::emit(DSC_Info* dsc, DS4_Controller* ctrl, int time_offset, bool is_salt) {
     if(!dsc || !ctrl) {
         return -1;
     }
+    m_salt_param = is_salt;
+    int64_t last_note_timestamp = 0;
     std::list<TimeStamp*>::iterator it_ts = dsc->event_seq.begin();
     std::list<Inst*>::iterator it_inst;
     Note* cur_note;
@@ -107,43 +121,43 @@ int DSC_OperateEmitter::emit(DSC_Info* dsc, DS4_Controller* ctrl, int time_offse
                 case NOTE_KEYCODE::CIRCLE:
                 case NOTE_KEYCODE::CROSS:
                 case NOTE_KEYCODE::SQUARE:
-                    emit_singal_btn(ctrl, time_offset, cur_note);
+                    last_note_timestamp = emit_singal_btn(ctrl, time_offset, cur_note);
                     break;
                 case NOTE_KEYCODE::UP:
                 case NOTE_KEYCODE::RIGHT:
                 case NOTE_KEYCODE::DOWN:
                 case NOTE_KEYCODE::LEFT:
-                    emit_dual_btn(ctrl, time_offset, cur_note);
+                    last_note_timestamp = emit_dual_btn(ctrl, time_offset, cur_note);
                     break;
                 case NOTE_KEYCODE::TRIANGLE_LONG:
                 case NOTE_KEYCODE::CIRCLE_LONG:
                 case NOTE_KEYCODE::CROSS_LONG:
                 case NOTE_KEYCODE::SQUARE_LONG:
-                    emit_hold(ctrl, time_offset, cur_note);
+                    last_note_timestamp = emit_hold(ctrl, time_offset, cur_note);
                     break;
                 case NOTE_KEYCODE::STAR:
-                    emit_star(ctrl, time_offset, cur_note);
+                    last_note_timestamp = emit_star(ctrl, time_offset, cur_note);
                     break;
                 case NOTE_KEYCODE::STAR_DOUBLE:
                 case NOTE_KEYCODE::STAR_CHANCE:
-                    emit_star_dual(ctrl, time_offset, cur_note);
+                    last_note_timestamp = emit_star_dual(ctrl, time_offset, cur_note);
                     break;
                 case NOTE_KEYCODE::STAR_LINE_START:
                 case NOTE_KEYCODE::STAR_LINE_END:
-                    emit_star_line(ctrl, time_offset, cur_note);
+                    last_note_timestamp = emit_star_line(ctrl, time_offset, cur_note);
                     break;
                 case NOTE_KEYCODE::TRIANGLE_RUSH:
                 case NOTE_KEYCODE::CIRCLE_RUSH:
                 case NOTE_KEYCODE::CROSS_RUSH:
                 case NOTE_KEYCODE::SQUARE_RUSH:
-                    emit_rush(ctrl, time_offset, cur_note);
+                    last_note_timestamp = emit_rush(ctrl, time_offset, cur_note);
                     break;
                 }
             }
         }
         ++it_ts;
     }
-    return 0;
+    return last_note_timestamp;
 }
 
 int DSC_OperateEmitter::is_note_valid(Note* note) {
@@ -153,14 +167,15 @@ int DSC_OperateEmitter::is_note_valid(Note* note) {
     return 1;
 }
 
-int DSC_OperateEmitter::emit_singal_btn(DS4_Controller* ctrl, int time_offset, Note* note) {
+int64_t DSC_OperateEmitter::emit_singal_btn(DS4_Controller* ctrl, int time_offset, Note* note) {
     DS4_Operate op;
-    op.cb = nullptr;
 
+    //op.cb_param = (void*)note->file_offset;
+    op.cb = nullptr;
 
     op.key = TBL_CONVERT[note->note_keycode];
 
-    op.time_left_ms = m_basetime + note->note_time_offset + BTN_SINGLE_PUSH_ADVANCE_TIME_MS;
+    op.time_left_ms = m_basetime + note->note_unk2 + BTN_SINGLE_PUSH_ADVANCE_TIME_MS + gen_salt_ms();
 
     if((op.key == m_last_emit_key) && ((op.time_left_ms - m_last_emit_time) < BTN_SINGLE_EXCHANGE_THRES)) {
         op.key = BTN_CONVERT_R2L(op.key);
@@ -178,16 +193,18 @@ int DSC_OperateEmitter::emit_singal_btn(DS4_Controller* ctrl, int time_offset, N
     op.time_left_ms += BTN_SINGLE_HOLD_TIME_MS;
     ctrl->insert_operate(op); // up
 
-    return 0;
+    return op.time_left_ms;
 }
 
-int DSC_OperateEmitter::emit_dual_btn(DS4_Controller* ctrl, int time_offset, Note* note) {
+int64_t DSC_OperateEmitter::emit_dual_btn(DS4_Controller* ctrl, int time_offset, Note* note) {
     DS4_Operate op;
+
+    //op.cb_param = (void*)note->file_offset;
     op.cb = nullptr;
 
     op.key = TBL_CONVERT[note->note_keycode];
     op.val = 1;
-    op.time_left_ms = m_basetime + note->note_time_offset + BTN_DUAL_PUSH_ADVANCE_TIME_MS;
+    op.time_left_ms = m_basetime + note->note_unk2 + BTN_DUAL_PUSH_ADVANCE_TIME_MS + gen_salt_ms();
     ctrl->insert_operate(op); // down DPAD
     op.key = BTN_CONVERT_L2R(op.key);
     ctrl->insert_operate(op); // down BTN
@@ -198,38 +215,43 @@ int DSC_OperateEmitter::emit_dual_btn(DS4_Controller* ctrl, int time_offset, Not
     op.key = BTN_CONVERT_R2L(op.key);
     ctrl->insert_operate(op); // up DPAD
 
-    return 0;
+    return op.time_left_ms;
 }
 
-int DSC_OperateEmitter::emit_hold(DS4_Controller* ctrl, int time_offset, Note* note) {
+int64_t DSC_OperateEmitter::emit_hold(DS4_Controller* ctrl, int time_offset, Note* note) {
     DS4_Operate op;
+
+    //op.cb_param = (void*)note->file_offset;
     op.cb = nullptr;
 
     op.key = TBL_CONVERT[note->note_keycode];
     if(note->note_hold_length != 0xffffffff) {
         op.val = 1;
-        op.time_left_ms = m_basetime + note->note_time_offset + BTN_HOLD_ADVANCE_TIME_MS;
+        op.time_left_ms = m_basetime + note->note_unk2 + BTN_HOLD_ADVANCE_TIME_MS + gen_salt_ms();
     } else {
         op.val = 0;
-        op.time_left_ms = m_basetime + note->note_time_offset + BTN_HOLD_RELEASE_DELAY_TIME_MS;
+        op.time_left_ms = m_basetime + note->note_unk2 + BTN_HOLD_RELEASE_DELAY_TIME_MS + gen_salt_ms();
     }
 
     ctrl->insert_operate(op); // up
 
-    return 0;
+    return op.time_left_ms;
 }
 
-int DSC_OperateEmitter::emit_star(DS4_Controller* ctrl, int time_offset, Note* note) {
+int64_t DSC_OperateEmitter::emit_star(DS4_Controller* ctrl, int time_offset, Note* note) {
     assert(STAR_SLIDE_WINDOW_MS%STAR_SLIDE_STEP_N == 0);
     DS4_Operate op;
-    op.key = TBL_CONVERT[note->note_keycode];
+
+    //op.cb_param = (void*)note->file_offset;
     op.cb = nullptr;
+
+    op.key = TBL_CONVERT[note->note_keycode];
 
     int window = STAR_SLIDE_WINDOW_MS, step = STAR_SLIDE_STEP_N;
     int operate_interval = window/step;
     int operate_dac_step = (STICK_DAC_MAX-STICK_DAC_MID)/step;
     int dac = STICK_DAC_MID;
-    int start_time = m_basetime+note->note_time_offset-(operate_interval/STAR_SLIDE_TRIGGE_POINT_DIV_N)+STAR_SLIDE_ADVANCE_TIME_MS;
+    int start_time = m_basetime+note->note_unk2-(operate_interval/STAR_SLIDE_TRIGGE_POINT_DIV_N)+STAR_SLIDE_ADVANCE_TIME_MS + gen_salt_ms();
     op.val = dac;
     op.time_left_ms = start_time;
     ctrl->insert_operate(op);
@@ -247,21 +269,23 @@ int DSC_OperateEmitter::emit_star(DS4_Controller* ctrl, int time_offset, Note* n
     op.time_left_ms += operate_interval;
     ctrl->insert_operate(op);
 
-    return 0;
+    return op.time_left_ms;
 }
 
 
-int DSC_OperateEmitter::emit_star_dual(DS4_Controller* ctrl, int time_offset, Note* note) {
+int64_t DSC_OperateEmitter::emit_star_dual(DS4_Controller* ctrl, int time_offset, Note* note) {
     assert(STAR_DUAL_SLIDE_WINDOW_MS%STAR_DUAL_SLIDE_STEP_N == 0);
     DS4_Operate op;
-    op.key = TBL_CONVERT[note->note_keycode];
+    //op.cb_param = (void*)note->file_offset;
     op.cb = nullptr;
+
+    op.key = TBL_CONVERT[note->note_keycode];
 
     int window = STAR_DUAL_SLIDE_WINDOW_MS, step = STAR_DUAL_SLIDE_STEP_N;
     int operate_interval = window/step;
     int operate_dac_step = (STICK_DAC_MAX - STICK_DAC_MID)/step;
     int dac = STICK_DAC_MID;
-    int start_time = m_basetime+note->note_time_offset-(operate_interval/STAR_DUAL_SLIDE_TRIGGE_POINT_DIV_N)+STAR_DUAL_SLIDE_ADVANCE_TIME_MS;
+    int start_time = m_basetime+note->note_unk2-(operate_interval/STAR_DUAL_SLIDE_TRIGGE_POINT_DIV_N)+STAR_DUAL_SLIDE_ADVANCE_TIME_MS + gen_salt_ms();
     op.val = dac;
     op.time_left_ms = start_time;
     ctrl->insert_operate(op);
@@ -287,27 +311,32 @@ int DSC_OperateEmitter::emit_star_dual(DS4_Controller* ctrl, int time_offset, No
     ctrl->insert_operate(op);
     op.key = STIWCH_STICK(op.key);
     ctrl->insert_operate(op);
-    return 0;
+    return op.time_left_ms;
 }
 
-int DSC_OperateEmitter::emit_star_line(DS4_Controller* ctrl, int time_offset, Note* note) {
-    assert(0);
-    return 0;
+int64_t DSC_OperateEmitter::emit_star_line(DS4_Controller* ctrl, int time_offset, Note* note) {
+    assert(0); // not sure whether this branch can work
+    Note note_star = *note;
+    note_star.note_keycode = NOTE_KEYCODE::STAR;
+    return emit_star(ctrl, time_offset, &note_star);;
 }
 
-int DSC_OperateEmitter::emit_rush(DS4_Controller* ctrl, int time_offset, Note* note) {
+int64_t DSC_OperateEmitter::emit_rush(DS4_Controller* ctrl, int time_offset, Note* note) {
     DS4_Operate op1;
     DS4_Operate op2;
+    //op1.cb_param = (void*)note->file_offset;
     op1.cb = nullptr;
+    //op2.cb_param = (void*)note->file_offset;
     op2.cb = nullptr;
+
     op1.key = TBL_CONVERT[note->note_keycode];
     op2.key = BTN_CONVERT_R2L(op1.key);
 
     op1.val = 1;
-    op1.time_left_ms = m_basetime + note->note_time_offset + RUSH_PUSH_ADVANCE_TIME_MS;
+    op1.time_left_ms = m_basetime + note->note_unk2 + RUSH_PUSH_ADVANCE_TIME_MS + gen_salt_ms();
 
     op2.val = 1;
-    op2.time_left_ms = m_basetime + note->note_time_offset + RUSH_PUSH_ADVANCE_TIME_MS+(RUSH_INVERVAL_MS/2);
+    op2.time_left_ms = m_basetime + note->note_unk2 + RUSH_PUSH_ADVANCE_TIME_MS +(RUSH_INVERVAL_MS/2) + gen_salt_ms();
 
     int step = convert_time_to_ms(note->note_hold_length)/RUSH_INVERVAL_MS;
     step = step*2;
@@ -322,10 +351,19 @@ int DSC_OperateEmitter::emit_rush(DS4_Controller* ctrl, int time_offset, Note* n
         }
 
     }
-    return 0;
+
+    if(RUSH_IS_DUAL) {
+        return op2.time_left_ms;
+    } else {
+        return op1.time_left_ms;
+    }
 }
 
-int DSC_OperateEmitter::salt_generator(bool is_salt) {
-    return 0;
+int DSC_OperateEmitter::gen_salt_ms() {
+    static const int salt_range = 8;
+    if(m_salt_param)
+        return rand()%salt_range;
+    else
+        return 0;
 }
 

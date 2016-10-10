@@ -54,8 +54,8 @@ int end_with(const char * str, const char * end) {
     int result = 0;
 
     if (str != NULL && end != NULL) {
-        int l1 = strlen(str);
-        int l2 = strlen(end);
+        int64_t l1 = strlen(str);
+        int64_t l2 = strlen(end);
         if (l1 >= l2) {
             if (strcmp(str + l1 - l2, end) == 0) {
                 result = 1;
