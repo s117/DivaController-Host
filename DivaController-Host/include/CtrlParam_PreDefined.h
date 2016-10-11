@@ -1,28 +1,16 @@
-//
-//  CtrlParam_PreDefined.h
-//  DivaController-Host
-//
-//  Created by s117 on 16/10/11.
-//  Copyright © 2016年 s117. All rights reserved.
-//
+// Copyright (C) 2016 S117 <admin@0x10c.pw>
+// Bitman Lab.
+// Licensed under the terms of the GNU GPL, version 2
+// http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt
+
 
 #ifndef __H_CTRL_PARAM_PREDEFINED
 #define __H_CTRL_PARAM_PREDEFINED
 #include "DivaControllerParam.h"//
-//  CtrlParam_PreDefined.h
-//  DivaController-Host
-//
-//  Created by s117 on 16/10/11.
-//  Copyright © 2016年 s117. All rights reserved.
-//
 
 #ifndef __H_CTRL_PARAM_PREDEFINED
 #define __H_CTRL_PARAM_PREDEFINED
 #include "DivaControllerParam.h"
-//if(dsc_emitter.emit(info, controller, -1090, false)){ // ninjia_easy
-//if(dsc_emitter.emit(info, controller, -1440, false)){ // satisfication_ex
-//if(dsc_emitter.emit(info, controller, 610, false)){ // ultimate_ex
-//if(dsc_emitter.emit(info, controller, 602, false)) {// 圣枪爆裂
 
 diva_control_param diva_param_Strangers_easy = { // need to be measure the value of time_offset
     .difficulty = diva_control_param::DIFFICULTY::EASY ,

@@ -1,12 +1,11 @@
-//
-//  DSC_Reader.cpp
-//  DivaController-Host
-//
-//  Created by s117 on 16/9/30.
-//  Copyright © 2016年 s117. All rights reserved.
-//
+// Copyright (C) 2016 S117 <admin@0x10c.pw>
+// Bitman Lab.
+// Licensed under the terms of the GNU GPL, version 2
+// http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt
+
 
 #include "DS4_Output_Serial.h"
+
 DS4_Output_Serial::DS4_Output_Serial() {
     serial = new SerialPort();
     serial->openport(DS4_OUTPUT_SERIAL_COM_N, DS4_OUTPUT_SERIAL_BUAD, true);

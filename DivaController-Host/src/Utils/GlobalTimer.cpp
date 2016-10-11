@@ -1,10 +1,8 @@
-//
-//  GlobalTimer.cpp
-//  timer_test
-//
-//  Created by s117 on 16/10/1.
-//  Copyright © 2016年 s117. All rights reserved.
-//
+// Copyright (C) 2016 S117 <admin@0x10c.pw>
+// Bitman Lab.
+// Licensed under the terms of the GNU GPL, version 2
+// http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt
+
 
 #include "GlobalTimer.h"
 #include <signal.h>

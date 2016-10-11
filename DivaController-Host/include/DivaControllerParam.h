@@ -1,10 +1,8 @@
-//
-//  DivaControllerParam.h
-//  DivaController-Host
-//
-//  Created by s117 on 16/10/10.
-//  Copyright © 2016年 s117. All rights reserved.
-//
+// Copyright (C) 2016 S117 <admin@0x10c.pw>
+// Bitman Lab.
+// Licensed under the terms of the GNU GPL, version 2
+// http://www.gnu.org/licenses/old-licenses/gpl-2.0.txt
+
 
 #ifndef __H_DIVA_CONTROLLER_PARAM
 #define __H_DIVA_CONTROLLER_PARAM
