@@ -2071,7 +2071,7 @@ diva_control_param diva_param_Ending_Medley__Ultimate_Exquisite_Rampage_extreme 
     .difficulty = diva_control_param::DIFFICULTY::EXTREME ,
     .version = diva_control_param::GAME_VERSION::X ,
     .pv_no = 800+30 ,
-    .time_offset = 610,
+    .time_offset = -390,
     .is_add_salt = false
 };
 

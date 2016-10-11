@@ -94,7 +94,7 @@ DS4_Controller::DS4_Controller() {
     m_routine_id = m_gt->add_routine(timer_trampoline, this);
     m_isRunning = true;
     pthread_create(&m_dispatcher_thread_id, NULL, dispatcher_trampoline, this);
-    move_pthread_to_realtime_scheduling_class(m_dispatcher_thread_id);
+    //move_pthread_to_realtime_scheduling_class(m_dispatcher_thread_id);
 }
 
 DS4_Controller::~DS4_Controller() {

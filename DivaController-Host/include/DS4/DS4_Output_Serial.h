@@ -12,7 +12,7 @@
 #include "SerialPort.h"
 
 #define DS4_OUTPUT_SERIAL_COM_N "/dev/cu.usbserial"
-#define DS4_OUTPUT_SERIAL_BUAD  B230400
+#define DS4_OUTPUT_SERIAL_BUAD  B115200
 
 class DS4_Output_Serial : public DS4_Output {
 public:
