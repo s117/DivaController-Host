@@ -41,11 +41,11 @@ static const char* const TBL_CTRL_CODE_PATTERN[] = {
     "M%02hhx",
     "N%02hhx",
     "O%02hhx",
-    "Z%02hhx",
     "P%02hhx",
     "Q%02hhx",
     "R%02hhx",
     "S%02hhx",
+    "T%02hhx",
 };
 static const int LEN_CTRL_CODE = 5;
 
@@ -206,13 +206,10 @@ void* DS4_Controller::dispatch_check(DS4_Controller *ctrl) {
         if(!ctrl->isRunning())
             return 0;
         pthread_mutex_lock(&ctrl->m_mtx_ready_FIFO);
-        //printf("m_op_ready_FIFO.size()=%lu\n", ctrl->m_op_ready_FIFO.size());
         assert(!list_empty(&ctrl->m_op_ready_FIFO));
         op = list_entry(ctrl->m_op_ready_FIFO.next, DS4_Operate, list);
         list_del(&op->list);
 
-        //op = ctrl->m_op_ready_FIFO.next;
-        //printf("m_op_ready_FIFO.size()=%lu\n", ctrl->m_op_ready_FIFO.size());
         pthread_mutex_unlock(&ctrl->m_mtx_ready_FIFO);
         sprintf(buffer, TBL_CTRL_CODE_PATTERN[op->key], op->val);
 
@@ -222,12 +219,6 @@ void* DS4_Controller::dispatch_check(DS4_Controller *ctrl) {
         }
         if(op->cb) op->cb(op->cb_param);
         delete op;
-//        it = ctrl->m_output.begin();
-//        while(it != ctrl->m_output.end()){
-//            (*it)->write(buffer);
-//            (*it)->flush();
-//            ++it;
-//        }
     }
     return 0;
 }

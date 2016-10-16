@@ -137,10 +137,26 @@ int DivaController::work(diva_control_param& param) {
     op.val = 0;
     op.cb = NULL;
     op.time_left_ms = 0;
-    controller.insert_operate(op); // use to power up the DS4
+    controller.insert_operate(op); // power up the DS4
 
-    usleep(1000*500); // wait some time
+    usleep(1000*2500); // wait some time
 
+    op.key = op.BTN_CIRCLE;
+    op.val = 1;
+    op.cb = NULL;
+    op.time_left_ms = 0;
+    controller.insert_operate(op);
+    
+    usleep(1000*500);
+    
+    op.key = op.BTN_CIRCLE;
+    op.val = 0;
+    op.cb = NULL;
+    op.time_left_ms = 0;
+    controller.insert_operate(op); // switch joystick
+    
+    usleep(1000*1000); // wait some time
+    
     op.key = op.BTN_CIRCLE;
     op.val = 1;
     op.cb = NULL;
@@ -153,9 +169,9 @@ int DivaController::work(diva_control_param& param) {
     op.val = 0;
     op.cb = NULL;
     op.time_left_ms = 0;
-    controller.insert_operate(op); // use to start the game
+    controller.insert_operate(op); // start the game
 
-    usleep(1000*500);
+    usleep(1000*500); // wait some time
 
     printf("\nstart.\n");
     timestamp();

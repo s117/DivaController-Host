@@ -10,6 +10,7 @@
 #include <assert.h>
 
 
+#define SALT_RANGE                              (30)
 
 #define BTN_SINGLE_PUSH_ADVANCE_TIME_MS         (0)
 #define BTN_SINGLE_HOLD_TIME_MS                 (50)
@@ -365,9 +366,8 @@ int64_t DSC_OperateEmitter::emit_rush(DS4_Controller* ctrl, int time_offset, Not
 }
 
 int DSC_OperateEmitter::gen_salt_ms() {
-    static const int salt_range = 8;
     if(m_salt_param)
-        return rand()%salt_range;
+        return rand()%SALT_RANGE;
     else
         return 0;
 }

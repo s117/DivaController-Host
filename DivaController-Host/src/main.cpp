@@ -10,7 +10,7 @@
 int main(int argc, char* argv[]) {
     GlobalTimer1ms::get_instance();
     DivaController ctrl = DivaController();
-    return ctrl.work(diva_param_Ending_Medley__Ultimate_Exquisite_Rampage_extreme);
+    return ctrl.work(diva_param_LOL_lots_of_laugh_normal);
 }
 
 
