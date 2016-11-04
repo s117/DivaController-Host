@@ -19,7 +19,7 @@
 #define SERIAL_ERROR_OPEN_FAIL      0x00000002
 #define SERIAL_ERROR_SET_FAIL       0x00000003
 #define SERIAL_ERROR_ILLEGAL_STATE  0x00000004
-
+//#define CNEW_RTSCTS
 class SerialPort {
 public:
     SerialPort();

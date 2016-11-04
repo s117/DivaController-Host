@@ -102,7 +102,7 @@ int DivaController::work(diva_control_param& param) {
 
     DS4_Controller controller = DS4_Controller();
     controller.add_output(&output_serial);
-    controller.add_output(&output_stdout);
+    //controller.add_output(&output_stdout);
     reset_ds4_btn(&controller);
 
     DSC_OperateEmitter dsc_emitter = DSC_OperateEmitter();

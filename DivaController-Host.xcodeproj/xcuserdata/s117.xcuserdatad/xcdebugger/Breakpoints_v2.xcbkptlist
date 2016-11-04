@@ -674,11 +674,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DivaController-Host/src/DS4/DS4_Controller.cpp"
-            timestampString = "497829200.256795"
+            timestampString = "499632235.928652"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "136"
-            endingLineNumber = "136"
+            startingLineNumber = "137"
+            endingLineNumber = "137"
             landmarkName = "DS4_Controller::insert_operate(DS4_Operate&amp; op)"
             landmarkType = "7">
             <Locations>
@@ -737,11 +737,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DivaController-Host/src/DS4/DS4_Controller.cpp"
-            timestampString = "497829268.867661"
+            timestampString = "499632235.928652"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "141"
-            endingLineNumber = "141"
+            startingLineNumber = "142"
+            endingLineNumber = "142"
             landmarkName = "DS4_Controller::insert_operate(DS4_Operate&amp; op)"
             landmarkType = "7">
          </BreakpointContent>
@@ -872,6 +872,38 @@
             endingLineNumber = "14"
             landmarkName = "main(int argc, char* argv[])"
             landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DivaController-Host/src/Utils/SerialPort.cpp"
+            timestampString = "499629876.282479"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
+            landmarkName = "SerialPort::openport(const char* com, speed_t baudrate, bool rawRead)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DivaController-Host/src/Utils/SerialPort.cpp"
+            timestampString = "499632060.539146"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
+            landmarkName = "SerialPort::openport(const char* com, speed_t baudrate, bool rawRead)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

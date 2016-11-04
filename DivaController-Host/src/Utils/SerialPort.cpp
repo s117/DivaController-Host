@@ -14,28 +14,38 @@ SerialPort::~SerialPort() {
     closeport();
 }
 
+static void print_termios(struct termios* options){
+    printf("[debug]\tc_iflag=0x%08lX\n", options->c_iflag);
+    printf("[debug]\tc_oflag=0x%08lX\n", options->c_oflag);
+    printf("[debug]\tc_cflag=0x%08lX\n", options->c_cflag);
+    printf("[debug]\tc_lflag=0x%08lX\n", options->c_lflag);
+    printf("[debug]\tc_ispeed=0x%08lX\n", options->c_ispeed);
+    printf("[debug]\tc_ospeed=0x%08lX\n", options->c_ospeed);
+}
+
 //open port with given param, and use 8N1, no flow control, non-block read mode default, return error code
 
 int SerialPort::openport(const char* com, speed_t baudrate, bool rawRead) {
     struct termios options;
     if (!(serialfd < 0))
         return SERIAL_OK;
-    //if ((serialfd = open(com, O_RDWR | O_NOCTTY)) < 0)
     if ((serialfd = open(com, O_RDWR)) < 0)
+    //if ((serialfd = open(com, O_RDWR | O_NOCTTY)) < 0)
         return SERIAL_ERROR_OPEN_FAIL;
     tcgetattr(serialfd, &options);
     cfsetispeed(&options, baudrate);
     cfsetospeed(&options, baudrate);
 
     //control:
-    options.c_cflag |= (CLOCAL | CREAD); // Enable the receiver and set local mode...
+    //options.c_cflag |= (CLOCAL | CREAD); // Enable the receiver and set local mode...
 
     options.c_cflag &= ~CSIZE;
     options.c_cflag |= CS8; // 8 Data bit
     options.c_cflag &= ~PARENB; // No parity bit
     options.c_cflag &= ~CSTOPB; // 1 Stop bit
-
-
+    options.c_cflag &= ~CRTSCTS;
+    options.c_cflag &= ~(CDTR_IFLOW|CDSR_OFLOW);
+    options.c_cflag &= ~CCAR_OFLOW;
 #ifdef CNEW_RTSCTS
     options.c_cflag &= ~CNEW_RTSCTS; // Disable hardware flow control, for some platform only
 #endif
@@ -53,9 +63,10 @@ int SerialPort::openport(const char* com, speed_t baudrate, bool rawRead) {
     options.c_iflag &= ~(IXON | IXOFF | IXANY); // Disable software flow control
 
     //output data:
-    options.c_oflag &= ~OPOST; // Output raw data
+    options.c_oflag &= ~ OPOST; // Output raw data
     options.c_cc[VTIME] = 150; // Set timeout 15 seconds
     options.c_cc[VMIN] = 0; // Update the options and do it NOW
+    print_termios(&options);
     if (tcsetattr(serialfd, TCSANOW, &options) != 0)// Apply setting
         return SERIAL_ERROR_SET_FAIL;
     else
@@ -114,7 +125,7 @@ size_t SerialPort::readfix(void* buf, size_t nbytes) {
 //flush data in buffer
 
 void SerialPort::flush() {
-    tcflush(this->serialfd, TCIFLUSH);
+    tcflush(this->serialfd, TCIOFLUSH);
 }
 
 //set block mode, TRUE FOR BLOCK, FALSE FOR UNBLOCK, return error code

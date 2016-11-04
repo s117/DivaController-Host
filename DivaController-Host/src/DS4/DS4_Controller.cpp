@@ -24,6 +24,7 @@ static inline uint64_t convert_us_to_ms(uint64_t us) {
         return us/1000;
     }
 }
+#define CTRL_WORD_LEN 3
 
 static const char* const TBL_CTRL_CODE_PATTERN[] = {
     "A%02hhx",
@@ -181,7 +182,6 @@ void DS4_Controller::tick(DS4_Controller* ctrl) {
         list_move_tail(&cursor->list, &ctrl->m_op_ready_FIFO);
         pthread_mutex_unlock(&ctrl->m_mtx_ready_FIFO);
         sem_post(ctrl->m_sem_ready);
-        //puts("S!\n");
     }
     //pthread_mutex_unlock(&ctrl->m_mtx_tick);
     pthread_mutex_unlock(&ctrl->m_mtx_pend_FIFO);
@@ -214,7 +214,7 @@ void* DS4_Controller::dispatch_check(DS4_Controller *ctrl) {
         sprintf(buffer, TBL_CTRL_CODE_PATTERN[op->key], op->val);
 
         list_for_each_entry(cursor, &ctrl->m_output_list, list) {
-            cursor->output->write(buffer, 4);
+            cursor->output->write(buffer, CTRL_WORD_LEN);
             cursor->output->flush();
         }
         if(op->cb) op->cb(op->cb_param);

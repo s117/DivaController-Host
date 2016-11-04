@@ -21,7 +21,7 @@ int DS4_Output_Serial::write(const char* data, size_t len) {
     return 0;
 }
 void DS4_Output_Serial::flush() {
-    serial->flush();
+    //serial->flush();
 }
 
 
